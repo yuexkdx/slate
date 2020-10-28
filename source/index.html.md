@@ -1,82 +1,74 @@
 ---
-title: API Reference
+title: DxChain API
 
-language_tabs: # must be one of https://git.io/vQNgJ
+language_tabs: 
   - shell
-  - ruby
   - python
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
+  - <a href='https://www.dxchain.com'>官网</a>
+  - <a href='https://shequ.dxchain.com/'>DxChain社区</a>
 
 search: true
 
 code_clipboard: true
 ---
 
-# Introduction
+# 简介
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+欢迎使用DxChain API，你可以通过DxChain API获取DxChain中的账户、交易、区块和共识相关的信息，并能通过API进行投票和转账操作。此文档在后续工作中会持续更新。
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+DxChain API包括：原生API和SDK的调用方式。
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+DxChain API按照接口功能的不同划分为：账户相关、交易相关、区块相关、共识相关和状态相关的接口。
 
-# Authentication
+## SDK
 
-> To authorize, use this code:
+开发者可根据自身偏好和使用场景选择合适自己的方式来使用DxChain API。目前我们提供Golang，Python两个语言版本的[SDK](https://github.com/DxChainNetwork/gdx-sdk)，并在SDK中内置了DxChain的所有API接口，具体使用方式可以参考接口的Golang和Python调用。
 
-```ruby
-require 'kittn'
+## 调用方式
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+`原生API使用方式`:
 
-```python
-import kittn
+`Golang SDK使用方式`:
 
-api = kittn.authorize('meowmeowmeow')
-```
+`Python SDK使用方式`:
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+# 更新说明
 
-```javascript
-const kittn = require('kittn');
+修正时间 | 接口| 类型| 描述|
+--------- | ------- | ------- |-----------
+2020.10.28 | |新增|添加所有接口文档
 
-let api = kittn.authorize('meowmeowmeow');
-```
+# API接口说明
 
-> Make sure to replace `meowmeowmeow` with your API key.
+DxChain提供测试网和主网的测试地址：
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+**测试网**：
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+**主网**：
 
-`Authorization: meowmeowmeow`
+# 账户相关
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+# 交易相关
 
-# Kittens
+## 根据Hash获取交易详情
 
-## Get All Kittens
 
-```ruby
-require 'kittn'
+## 根据Hash获取交易收据
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+## 根据地址获取交易数量
+
+## 
+
+# 区块相关
+
+# 共识相关
+
+# 状态相关
+
+## 获取账户余额
 
 ```python
 import kittn
@@ -118,124 +110,23 @@ let kittens = api.kittens.get();
 ]
 ```
 
-This endpoint retrieves all kittens.
+根据账户地址和高度信息获取账户余额，默认高度为最新高度
 
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
+### 请求参数
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+ADDRESS||账户地址
+BLOCK|latest|区块高度
+
+### 返回值
+
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
 
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
