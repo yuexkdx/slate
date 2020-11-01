@@ -189,9 +189,52 @@ frozen_assets||冻结金额
 
 获取客户端持有的地址列表
 
+#### 请求参数
+
+#### 返回值
+
+参数名称    | 是否必需    | 描述
+--------- | ------- | -----------
+addresses |         | 客户端持有的地址列表
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+
+	accounts, err := client.GetAccounts()
+	if err != nil {
+		panic("get accounts error, err = "+ err.Error())
+	}
+
+	fmt.Println("accounts = ", accounts)
+}
+```
+
+```python
+from gdx.jsonrpc.account.account import Account
+
+account = Account()
+print(account.accounts())
+```
+
 ## eth_gasPrice
 
 返回当前链的gas price 单位为`camel`
+
+```shell
+
+```
 
 ```python
 from gdx.jsonrpc.account.account import Account
@@ -221,6 +264,10 @@ func main() {
 	}
 	fmt.Println("AvailableBalance = ", account.AvailableBalance.Div(account.AvailableBalance, big.NewInt(1e18)), "dx")
 }
+```
+
+```python
+
 ```
 
 # 交易相关
