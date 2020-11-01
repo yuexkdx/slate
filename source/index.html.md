@@ -110,6 +110,78 @@ func main() {
 }
 ```
 
+<aside class="success">
+Golang SDK实现了DxChain的账户创建、批量创建账户以及离线签名方法，具体实现过程详见：<code>gdx-sdk-go/account/account.go</code>
+</aside>
+
+<code>
+	func createAccount() (*common.Account, error) {
+	privKey, err := crypto.GenerateKey()
+	if err != nil {
+		return nil, err
+	}
+
+	return &common.Account{
+		Address:   crypto.PubkeyToAddress(privKey.PublicKey).String(),
+		PublicKey: hexutil.Encode(crypto.FromECDSAPub(&privKey.PublicKey)),
+		PrivyKey:  hexutil.Encode(crypto.FromECDSA(privKey)),
+	}, nil
+}
+
+// CreateAccount create the new account.
+func CreateAccount() (*common.Account, error) {
+	return createAccount()
+}
+
+// CreateBatchAccount create the batch account according to the params number.
+func CreateBatchAccount(count int) ([]*common.Account, error) {
+	if count <= 0 {
+		return nil, constant.ErrCountLessZero
+	}
+
+	var accountSet []*common.Account
+	for i := 0; i < count; i++ {
+		account, err := createAccount()
+		if err != nil {
+			return nil, err
+		}
+		accountSet = append(accountSet, account)
+	}
+
+	return accountSet, nil
+}
+
+// FromPrivateKey get the secret key from the string.
+func fromPrivateKey(sk string) (*ecdsa.PrivateKey, error) {
+	if sk[0:2] == "0x" || sk[0:2] == "0X" {
+		sk = sk[2:]
+	}
+	return crypto.HexToECDSA(sk)
+}
+
+// SignTx signature the transaction hash.
+func SignTx(tx *types.Transaction, sk string) ([]byte, error) {
+	secretKey, err := fromPrivateKey(sk)
+	if err != nil {
+		return nil, err
+	}
+
+	//sigTx, err := types.SignTx(tx, types.NewEIP155Signer(big.NewInt(constant.ChainID)), secretKey)
+	//sigTx, err := types.SignTx(tx, types.HomesteadSigner{}, secretKey)
+	sigTx, err := types.SignTx(tx, types.FrontierSigner{}, secretKey)
+	if err != nil {
+		return nil, err
+	}
+
+	data, err := rlp.EncodeToBytes(sigTx)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+</code>
+
 方法名       | 功能描述
 ---------   | ------- 
 GetBalance  | [获取账户余额](#eth_getbalance)
@@ -739,33 +811,6 @@ func main() {
 ## eth_getTransactionReceiptsByHash
 
 根据交易Hash获取交易副本
-
-# 状态相关
-
-## eth_getTransactionByHash
-
-根据交易Hash获取交易详情
-
-## eth_getTransactionReceiptsByHash
-
-根据交易Hash获取交易副本
-
-## eth_getTransactionByHash
-
-根据交易Hash获取交易详情
-
-## eth_getTransactionReceiptsByHash
-
-根据交易Hash获取交易副本
-
-## eth_getTransactionByHash
-
-根据交易Hash获取交易详情
-
-## eth_getTransactionReceiptsByHash
-
-根据交易Hash获取交易副本
-
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
