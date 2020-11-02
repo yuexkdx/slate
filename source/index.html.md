@@ -165,16 +165,16 @@ Golang SDK实现了DxChain的账户创建、批量创建账户以及离线签名
 [GetCandidatesByBlockNumber](#dpos_candidates)|根据区块高度获取候选节点
 [GetCandidateInfo](#dpos_candidate)|根据候选节点地址和区块高度，获取候选节点详情
 [GetEpochID](#dpos_epochid)|根据区块高度获取周期号
-[GetVoteDeposit](#dpos_votedeposit)|根据矿机地址和区块高度，获取质押数
+[GetVoteDeposit](#dpos_votedeposit)|根据投票节点地址和区块高度，获取质押数
 [GetCandidateDeposit](#dpos_candidatedeposit)|根据候选节点和区块高度，获取候选节点质押数
-[GetVotedCandidatesByAddress](#dpos_getvotedcandidatesbyaddress)|根据矿机地址和区块高度，获取投票的候选节点
+[GetVotedCandidatesByAddress](#dpos_getvotedcandidatesbyaddress)|根据投票节点地址和区块高度，获取投票的候选节点
 [GetAllVotesOfCandidate](#dpos_getallvotesofcandidate)|根据候选节点地址和区块高度，获取候选节点的投票信息
 [GetAllVotesOfValidator](#dpos_getallvotesofvalidator)|根据出块节点地址和区块高度，获取出块节点的投票信息
 [GetValidatorDistribution](#dpos_getvalidatordistribution)|根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息
 [GetValidatorReward](#dpos_getvalidatorreward)|根据出块节点地址和起止高度，获取高度间出块节点的总奖励
 [GetBlockReward](#dpos_getblockreward)|根据区块高度，获取区块的奖励值
 [GetEpochInitDepositByNumber](#dpos_getepochinitdepositbynumber)|根据区块高度，查询对应周期的质押数
-[GetConfirmedBlockNumber](#dpos_getconfirmedblocknumber)|获取不可逆块高
+[GetConfirmedBlockNumber](#dpos_getconfirmedblocknumber)|获取不可逆区块高度
 
 
 ## Python SDK
@@ -199,16 +199,16 @@ Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照�
 [get_candidates](#dpos_candidates)|根据区块高度获取候选节点
 [get_candidate](#dpos_candidate)|根据候选节点地址和区块高度，获取候选节点详情
 [get_epoch_id](#dpos_epochid)|根据区块高度获取周期号
-[get_vote_deposit](#dpos_votedeposit)|根据矿机地址和区块高度，获取质押数
+[get_vote_deposit](#dpos_votedeposit)|根据投票节点地址和区块高度，获取质押数
 [get_candidate_deposit](#dpos_candidatedeposit)|根据候选节点和区块高度，获取候选节点质押数
-[get_voted_candidates_by_address](#dpos_getvotedcandidatesbyaddress)|根据矿机地址和区块高度，获取投票的候选节点
+[get_voted_candidates_by_address](#dpos_getvotedcandidatesbyaddress)|根据投票节点地址和区块高度，获取投票的候选节点
 [get_all_votes_of_candidate](#dpos_getallvotesofcandidate)|根据候选节点地址和区块高度，获取候选节点的投票信息
 [get_all_votes_of_validator](#dpos_getallvotesofvalidator)|根据出块节点地址和区块高度，获取出块节点的投票信息
 [get_validator_distribution](#dpos_getvalidatordistribution)|根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息
 [get_validator_reward](#dpos_getvalidatorreward)|根据出块节点地址和起止高度，获取高度间出块节点的总奖励
 [get_block_reward](#dpos_getblockreward)|根据区块高度，获取区块的奖励值
 [get_epoch_init_deposit](#dpos_getepochinitdepositbynumber)|根据区块高度，查询对应周期的质押数
-[get_confirmed_block_number](#dpos_getconfirmedblocknumber)|获取不可逆块高
+[get_confirmed_block_number](#dpos_getconfirmedblocknumber)|获取不可逆区块高度
 
 # 账户相关
 
@@ -817,7 +817,7 @@ print(block.get_block_transaction_count_by_number("latest"))
 
 ## dpos_validators
 
-根据区块高度查询对应的超级节点列表，区块高度默认为最新高度
+查询指定区块高度的出块节点列表，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -865,11 +865,11 @@ print(dpos.get_validators())
 
 | 参数名称 | 描述         |
 | -------- | ------------ |
-| result   | 超级节点列表 |
+| result   | 出块节点列表 |
 
 ## dpos_validator
 
-根据地址和区块高度查询对应的超级节点详细信息，区块高度默认为最新高度
+查询指定区块高度下的出块节点详细信息，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -925,7 +925,7 @@ print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 
 ## dpos_candidates
 
-根据区块高度查询对应的候选节点列表，区块高度默认为最新高度
+查询指定区块高度的候选节点列表，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -976,7 +976,7 @@ print(dpos.get_candidates())
 
 ## dpos_candidate
 
-根据地址和区块高度查询对应的候选节点详细信息，区块高度默认为最新高度
+查询指定区块高度下的候选节点详细信息，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1032,7 +1032,7 @@ print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 
 ## dpos_epochID
 
-根据区块高度查询对应的周期编号，区块高度默认为最新高度
+查询指定区块高度对应的周期号，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1083,7 +1083,7 @@ print(dpos.get_epoch_id())
 
 ## dpos_voteDeposit
 
-查询投票节点在指定高度的质押信息，区块高度默认为最新高度
+查询指定区块高度下的投票节点质押信息，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1131,11 +1131,11 @@ print(dpos.get_vote_deposit("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 
 | 参数名称 | 描述   |
 | -------- | ------ |
-| result   | 质押数 |
+| result   | 投票节点质押数 |
 
 ## dpos_candidateDeposit
 
-查询候选节点在指定高度的质押信息，区块高度默认为最新高度
+查询指定区块高度下的候选节点质押信息，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1183,11 +1183,11 @@ print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 
 | 参数名称 | 描述   |
 | -------- | ------ |
-| result   | 质押数 |
+| result   | 候选节点质押数 |
 
 ## dpos_getVotedCandidatesByAddress
 
-查询投票节点在指定块高时投了哪些候选节点，区块高度默认为最新高度
+查询投票节点在指定区块高度下选投候选节点列表，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1235,11 +1235,11 @@ print(dpos.get_voted_candidates_by_address("0x515a9a17b41024a1e9a41de21f90fa4cc7
 
 | 参数名称 | 描述             |
 | -------- | ---------------- |
-| result   | 投的候选节点列表 |
+| result   | 选投候选节点列表 |
 
 ## dpos_getAllVotesOfCandidate
 
-查询候选节点在指定块高被哪些投票节点投了，区块高度默认为最新高度
+查询候选节点在指定区块高度下对应投票节点列表，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1292,10 +1292,14 @@ print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 
 ## dpos_getAllVotesOfValidator
 
-查询超级节点在指定块高被哪些投票节点投了，这里查的是当前周期当选时的投票节点，同一周期查询结果相同，区块高度默认为最新高度
+查询出块节点在指定区块高度下对应的投票节点列表，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
+<aside class="success">
+这里查的是当前周期当选时的投票情况，同一周期查询结果相同
 </aside>
 
 ```shell
@@ -1333,7 +1337,7 @@ print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
-| address  | 是       | 超级节点地址 |
+| address  | 是       | 出块节点地址 |
 | height   | 否       | 区块高度       |
 
 #### 返回值
@@ -1345,7 +1349,7 @@ print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 
 ## dpos_getValidatorDistribution
 
-查询某个超级节点，在指定区块期间的所有奖励分配情况，结束区块高度默认为最新高度
+查询出块节点在指定区块高度区间的所有奖励分配情况，结束区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1390,7 +1394,7 @@ print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 
 | 参数名称    | 是否必需 | 描述         |
 | ----------- | -------- | ------------ |
-| address     | 是       | 超级节点地址 |
+| address     | 是       | 出块节点地址 |
 | startHeight | 是       | 开始区块高度   |
 | endHeight   | 否       | 结束区块高度   |
 
@@ -1403,7 +1407,7 @@ print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 
 ## dpos_getValidatorReward
 
-查询某个超级节点，在指定区块期间得到的总奖励，结束区块高度默认为最新高度
+查询出块节点在指定区块高度区间得到的总奖励，结束区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1444,7 +1448,7 @@ print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 10
 
 | 参数名称    | 是否必需 | 描述         |
 | ----------- | -------- | ------------ |
-| address     | 是       | 超级节点地址 |
+| address     | 是       | 出块节点地址 |
 | startHeight | 是       | 开始区块高度   |
 | endHeight   | 否       | 结束区块高度   |
 
@@ -1456,7 +1460,7 @@ print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 10
 
 ## dpos_getBlockReward
 
-查询指定区块高度时的出块奖励，区块高度默认为最新高度
+查询指定区块高度的出块奖励，区块高度默认为最新高度
 
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
@@ -1560,7 +1564,7 @@ print(dpos.get_epoch_init_deposit())
 
 ## dpos_getConfirmedBlockNumber
 
-查询最新不可逆的块
+查询最新不可逆区块高度 
 
 ```shell
 
