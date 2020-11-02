@@ -721,29 +721,607 @@ func main() {
 
 # 共识相关
 
-## eth_getTransactionByHash
 
-根据交易Hash获取交易详情
+## dpos_validators
 
-## eth_getTransactionReceiptsByHash
+根据区块高度查询对应的超级节点列表，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validators())
+print(dpos.get_validators("1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述   |
+| -------- | -------- | ------ |
+| height   | 否       | 区块号 |
+
+#### 返回参数
+
+| 参数名称 | 描述         |
+| -------- | ------------ |
+| result   | 超级节点列表 |
+
+## dpos_validator
+
+根据地址和区块高度查询对应的超级节点详细信息，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 超级节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称            | 描述                   |
+| ------------------- | ---------------------- |
+| validator           | 超级节点地址           |
+| total_vote          | 总票数                 |
+| current_epoch       | 查询高度对应的周期     |
+| epoch_mined_blocks  | 节点在该周期的出块数量 |
+| reward_distribution | 奖励分配比例           |
+
+## dpos_candidates
+
+根据区块高度查询对应的候选节点列表，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_candidates())
+print(dpos.get_candidates("1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidates","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidates","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述   |
+| -------- | -------- | ------ |
+| height   | 否       | 区块号 |
+
+#### 返回参数
+
+| 参数名称 | 描述         |
+| -------- | ------------ |
+| result   | 候选节点列表 |
+
+## dpos_candidate
+
+根据地址和区块高度查询对应的候选节点详细信息，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 候选节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称            | 描述               |
+| ------------------- | ------------------ |
+| candidate           | 候选节点地址       |
+| deposit             | 节点质押数         |
+| total_vote          | 总票数             |
+| reward_distribution | 声明的奖励分配比例 |
+
+## dpos_epochID
+
+根据区块高度查询对应的周期编号，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_epoch_id())
+print(dpos.get_epoch_id("1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_epochID","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_epochID","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述   |
+| -------- | -------- | ------ |
+| height   | 否       | 区块号 |
+
+#### 返回参数
+
+| 参数名称 | 描述     |
+| -------- | -------- |
+| result   | 周期编号 |
+
+## dpos_applyCandidate
 
 根据交易Hash获取交易副本
 
-## eth_getTransactionByHash
-
-根据交易Hash获取交易详情
-
-## eth_getTransactionReceiptsByHash
+## dpos_cancelCandidate
 
 根据交易Hash获取交易副本
 
-## eth_getTransactionByHash
-
-根据交易Hash获取交易详情
-
-## eth_getTransactionReceiptsByHash
+## dpos_vote
 
 根据交易Hash获取交易副本
+
+## dpos_cancelVote
+
+根据交易Hash获取交易副本
+
+## dpos_voteDeposit
+
+查询投票节点在指定高度的质押信息，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_vote_deposit("8d711efea31f3f0b40c512c0cfa5369cbde9838f"))
+print(dpos.get_vote_deposit("8d711efea31f3f0b40c512c0cfa5369cbde9838f", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 投票节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称 | 描述   |
+| -------- | ------ |
+| result   | 质押数 |
+
+## dpos_candidateDeposit
+
+查询候选节点在指定高度的质押信息，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidateDeposit","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidateDeposit","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 候选节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称 | 描述   |
+| -------- | ------ |
+| result   | 质押数 |
+
+## dpos_getVotedCandidatesByAddress
+
+查询投票节点在指定块高时投了哪些候选节点，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_voted_candidates_by_address("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+print(dpos.get_voted_candidates_by_address("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getVotedCandidatesByAddress","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getVotedCandidatesByAddress","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 投票节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称 | 描述             |
+| -------- | ---------------- |
+| result   | 投的候选节点列表 |
+
+## dpos_getAllVotesOfCandidate
+
+查询候选节点在指定块高被哪些投票节点投了，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfCandidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfCandidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 候选节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称  | 描述     |
+| --------- | -------- |
+| delegator | 投票节点 |
+| vote      | 投票数   |
+
+## dpos_getAllVotesOfValidator
+
+查询超级节点在指定块高被哪些投票节点投了，这里查的是当前周期当选时的投票节点，同一周期查询结果相同，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfValidator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfValidator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述         |
+| -------- | -------- | ------------ |
+| address  | 是       | 超级节点地址 |
+| height   | 否       | 区块号       |
+
+#### 返回参数
+
+| 参数名称  | 描述     |
+| --------- | -------- |
+| delegator | 投票节点 |
+| vote      | 投票数   |
+
+## dpos_getValidatorDistribution
+
+查询某个超级节点，在指定区块期间的所有奖励分配情况，结束区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999"))
+print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称    | 是否必需 | 描述         |
+| ----------- | -------- | ------------ |
+| address     | 是       | 超级节点地址 |
+| startHeight | 是       | 开始区块号   |
+| endHeight   | 否       | 结束区块号   |
+
+#### 返回参数
+
+| 参数名称  | 描述                   |
+| --------- | ---------------------- |
+| delegator | 投票节点               |
+| reward    | 投票节点得到的奖励分配 |
+
+## dpos_getValidatorReward
+
+查询某个超级节点，在指定区块期间得到的总奖励，结束区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999"))
+print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	txCount, err := client.GetBlockTxCountByNumber("latest")
+	if err != nil {
+		panic("get nonce error, err = " + err.Error())
+	}
+	fmt.Println("txCount:", txCount)
+}
+```
+
+#### 请求参数
+
+| 参数名称    | 是否必需 | 描述         |
+| ----------- | -------- | ------------ |
+| address     | 是       | 超级节点地址 |
+| startHeight | 是       | 开始区块号   |
+| endHeight   | 否       | 结束区块号   |
+
+#### 返回参数
+
+| 参数名称 | 描述   |
+| -------- | ------ |
+| result   | 总奖励 |
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
