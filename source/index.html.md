@@ -178,8 +178,8 @@ Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照�
 方法名     | 功能描述
 --------- | ------- 
 get_balance  | [获取账户余额](#eth_getbalance)
-GetAccounts | [获取客户端持有的地址清单](#eth_accounts)
-GetGasPrice | [获取Gas价格](#eth_gasprice)
+accounts | [获取客户端持有的地址清单](#eth_accounts)
+get_gas_price | [获取Gas价格](#eth_gasprice)
 get_transaction_by_hash | [根据Hash获取交易详情](#eth_gettransactionbyhash)
 GetTxReceipt| [根据Hash获取交易收据](#eth_gettransactionreceipt)
 get_transaction_count  | [根据地址获取交易数量](#eth_gettransactioncount)
@@ -215,13 +215,6 @@ GetConfirmedBlockNumber|[获取不可逆块高](#dpos_getconfirmedblocknumber)
 其中：1 Dx = 10^9 GCamel = 10^18 Camel
 </aside>
 
-```python
-from gdx.jsonrpc.account.account import Account
-
-account = Account()
-print(account.get_balance("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
-```
-
 ```shell
 
 
@@ -245,6 +238,13 @@ func main() {
 	}
 	fmt.Println("AvailableBalance = ", account.AvailableBalance.Div(account.AvailableBalance, big.NewInt(1e18)), "dx")
 }
+```
+
+```python
+from gdx.jsonrpc.account.account import Account
+
+account = Account()
+print(account.get_balance("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 ```
 
 #### 请求参数
@@ -311,13 +311,6 @@ print(account.accounts())
 
 返回当前链的gas price 单位为`camel`
 
-```python
-from gdx.jsonrpc.account.account import Account
-
-account = Account()
-print(account.get_balance("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
-```
-
 ```shell
 
 
@@ -340,6 +333,13 @@ func main() {
 	}
 	fmt.Println("gasPrice = ", gasPrice)
 }
+```
+
+```python
+from gdx.jsonrpc.account.account import Account
+
+account = Account()
+print(account.get_gas_price())
 ```
 
 #### 请求参数
