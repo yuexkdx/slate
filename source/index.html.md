@@ -203,6 +203,8 @@ frozen_assets||冻结金额
 addresses |         | 客户端持有的地址列表
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
