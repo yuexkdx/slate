@@ -185,10 +185,10 @@ get_transaction_receipts_by_hash| [根据Hash获取交易收据](#eth_gettransac
 get_transaction_count  | [根据地址获取交易数量](#eth_gettransactioncount)
 get_block_height|[获取区块高度](#eth_getblocknumber)
 get_block_by_hash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
-GetBlockByNumber|[根据区块高度获取区块详情](#eth_getblockbynumber)
-GetBlockTxCountByHash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
-GetBlockTxCountByNumber|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
-GetValidatorsByBlockNum|[根据高区块度获取出块节点](#dpos_validators)
+get_block_by_number|[根据区块高度获取区块详情](#eth_getblockbynumber)
+get_block_transaction_count_by_hash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
+get_block_transaction_count_by_number|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
+get_validators|[根据高区块度获取出块节点](#dpos_validators)
 GetValidatorInfo|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
 GetCandidatesByBlockNum|[根据区块高度获取候选节点](#dpos_candidates)
 GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
@@ -698,7 +698,7 @@ print(block.get_block_by_number("1024", True))
 | 参数名称 | 是否必需 | 描述                                        |
 | -------- | -------- | ------------------------------------------- |
 | hash     | 是       | 区块哈希                                    |
-| flag     | 是       | true返回交易详情，false返回交易哈希 |
+| flag     | 是       | true返回交易详情，false返回交易哈希|
 
 #### 返回参数
 
@@ -777,13 +777,6 @@ print(block.get_block_transaction_count_by_hash("0x0456e6f0d2942f866356e142a681b
 
 根据区块高度获取区块中的交易数量，默认区块高度为`latest`
 
-```python
-from gdx.jsonrpc.block.block import Block
-
-block = Block()
-print(block.get_block_transaction_count_by_number("latest"))
-```
-
 ```shell
 
 
@@ -802,10 +795,17 @@ func main() {
 	client := jsonrpc.NewClient()
 	txCount, err := client.GetBlockTxCountByNumber("latest")
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get block transaction count error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("txCount = ", txCount)
 }
+```
+
+```python
+from gdx.jsonrpc.block.block import Block
+
+block = Block()
+print(block.get_block_transaction_count_by_number("latest"))
 ```
 
 #### 请求参数
@@ -826,19 +826,11 @@ func main() {
 
 根据区块高度查询对应的超级节点列表，区块高度默认为最新高度（空）
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_validators())
-print(dpos.get_validators("1000"))
-```
-
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":["0x1f"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -858,6 +850,15 @@ func main() {
 	fmt.Println("validators:", validators)
 }
 ```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validators())
+print(dpos.get_validators("1000"))
+```
+
 
 #### 请求参数
 
