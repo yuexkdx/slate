@@ -152,9 +152,57 @@ Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照�
 
 方法名     | 功能描述
 --------- | ------- 
-get_balance|[获取账户余额](#eth_getbalance)
+get_balance  | [获取账户余额](#eth_getbalance)
+GetAccounts | [获取客户端持有的地址清单](#eth_accounts)
+GetGasPrice | [获取Gas价格](#eth_gasprice)
+get_transaction_by_hash | [根据Hash获取交易详情](#eth_gettransactionbyhash)
+GetTxReceipt| [根据Hash获取交易收据](#eth_gettransactionreceipt)
+get_transaction_count  | [根据地址获取交易数量](#eth_gettransactioncount)
+get_block_height|[获取区块高度](#eth_getblocknumber)
+get_block_height_by_hash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
+GetBlockByNumber|[根据区块高度获取区块详情](#eth_getblockbynumber)
+GetBlockTxCountByHash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
+GetBlockTxCountByNumber|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
+GetValidatorsByBlockNum|[根据高区块度获取出块节点](#dpos_validators)
+GetValidatorInfo|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
+GetCandidatesByBlockNum|[根据区块高度获取候选节点](#dpos_candidates)
+GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
+GetEpochID|[根据区块高度获取周期号](#dpos_epochid)
+GetVoteDeposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
+GetCandidateDeposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
+GetVotesCandidatesByAddress|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
+GetAllVotesOfCandidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
+GetAllVotesOfValidator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
+GetValidatorDistribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
+GetValidatorReward|[根据出块节点地址和起止高度，获取高度间出块节点的总奖励](#dpos_getvalidatorreward)
+GetBlockReward|[根据区块高度，获取区块的奖励值](#dpos_getblockreward)
+GetEpochInitDepositByNumber|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
+GetConfirmedBlockNumber|[获取不可逆块高](#dpos_getconfirmedblocknumber)
 
+```python
+import json
+from gdx.jsonrpc.transaction.transaction import Transaction
 
+if __name__ == "__main__":
+    tx = Transaction()
+    transaction = {
+        # Note that the address must be in checksum format or native bytes:
+        'to': '0x0000000000000000000000000000000000000000',
+        'value': 10,
+        'gas': 2000000,
+        'gasPrice': 234567897654321,
+        'nonce': 14,
+        'chainId': 0,
+        'data': ''
+    }
+    tr_json = tx.new_transaction(transaction)
+    tr = json.loads(tr_json)
+    key = '0xc1c3597ad0a514a08200a5b4be5a6a7e88975e6fc1e09ef49c42cc07367bca1c'
+    signed_json = tx.sign_tx(tr["result"], key)
+    signed_data = json.loads(signed_json)
+    tx_hash = tx.send_raw_transaction(signed_data["result"])
+    print(tx_hash)
+```
 
 # 账户相关
 
