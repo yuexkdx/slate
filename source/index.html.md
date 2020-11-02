@@ -413,13 +413,13 @@ print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5
 | input       | 填充数据                                                   |
 | nonce       | 此账户发出的交易序号数                                     |
 | r、s、v      | 在交易的密码学签名中用到的值，可以用于确定交易的发送方。   |
-| to          | 交易方                                                     |
-| txIndex     | 交易序号                                                   |
+| to          | 交易接收方                                                     |
+| txIndex     | 交易在区块中索引                                                   |
 | value       | 转账金额                                                 |
 
 ## eth_getTransactionReceipt
 
-根据Hash获取交易收据
+根据hash获取交易收据
 
 ```shell
 
@@ -471,18 +471,18 @@ print(transaction.get_transaction_receipts_by_hash("0x856ba402ba84232e1d32a56926
 | blockHash         | 区块哈希值                                       |
 | blockNumber       | 区块高度                                           |
 | cumulativeGasUsed | 区块中交易预计消耗的 gas 总量                  |
-| from              | 发起这个交易的账户或者用户                     |
-| gasUsed           | 区块中交易所实际消耗的 gas 总量。                |
-| logsBloom         | 布隆过滤器，用于判断某区块的交易是否产生了某日志 |
+| from              | 交易发起方                     |
+| gasUsed           | 区块中交易实际消耗的 gas 总量。                |
+| logsBloom         | 布隆过滤器  |
 | status            | 交易状态                                         |
-| to                | 交易方                                           |
+| to                | 交易接收方                                           |
 | txHash            | 交易哈希                                         |
 | txIndex           | 交易在区块中索引                                         |
 | logs              | 交易事件日志                                     |
 
 ## eth_getTransactionCount
 
-根据地址获取交易数量， 默认值为`latest`表示最新高度
+根据地址获取该账户发起的交易数量， 默认高度为(`latest`)最新高度
 
 ```shell
 
@@ -526,7 +526,7 @@ print(transaction.get_transaction_count("0x515a9a17b41024a1e9a41de21f90fa4cc7624
 
 | 参数名称 | 描述     |
 | -------- | -------- |
-| result   | 交易数量 |
+| result   | 该账户发起的交易数量 |
 
 # 区块相关
 
@@ -577,11 +577,7 @@ print(block.get_block_height())
 
 ## eth_getBlockByHash
 
-根据区块Hash获取区块详情
-
-<aside class="notice">
-参数中flag控制区块中交易的返回形式; flag为true 返回交易详情， flag为talse 返回交易Hash
-</aside>
+根据区块hash获取区块详情
 
 ```shell
 
@@ -632,8 +628,8 @@ print(block.get_block_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb1
 | coinBase         | 矿工收取奖励地址                                                    |
 | difficulty       | 此区块的难度值                                              |
 | extraData        | 填充数据                                                    |
-| gasLimit         | gas limit 标示了该区块所记录的所有交易可以使用的 gas 总量 |
-| gasUsed          | 区块中各条交易所实际消耗的 gas 总量                        |
+| gasLimit         | 表示该区块所记录的所有交易可以使用的 gas 上限 |
+| gasUsed          | 区块中所有交易实际消耗的 gas 总量                        |
 | hash             | 区块哈希值                                                  |
 | logsBloom        | 布隆过滤器                                                  |
 | mixHash          | 用于验证一个区块是否被真正记录到链上的哈希值                |
@@ -646,8 +642,8 @@ print(block.get_block_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb1
 | stateRoot        | 世界状态根哈希值                                            |
 | timeStamp        | 时间戳                                                      |
 | totalDifficulty  | 挖矿难度                                                    |
-| transactions     | 交易详情                                                    |
-| transactionsRoot | 交易根节点哈希值                                            |
+| transactions     | 交易列表                                                    |
+| transactionsRoot | 交易默克尔树根节点哈希值                                            |
 | uncles           | 叔块信息，一般为空                                          |
 | validator        | 矿工地址                                                  |
 
@@ -704,8 +700,8 @@ print(block.get_block_by_number("1024", True))
 | coinBase         | 矿工收取奖励地址                                                    |
 | difficulty       | 此区块的难度值                                              |
 | extraData        | 填充数据                                                    |
-| gasLimit         | gas limit 标示了该区块所记录的所有交易可以使用的 gas 总量。 |
-| gasUsed          | 区块中各条交易所实际消耗的 gas 总量。                       |
+| gasLimit         | 表示该区块所记录的所有交易可以使用的 gas 上限 |
+| gasUsed          | 区块中所有交易实际消耗的 gas 总量                        |
 | hash             | 区块哈希值                                                  |
 | logsBloom        | 布隆过滤器                                                  |
 | mixHash          | 用于验证一个区块是否被真正记录到链上的哈希值                |
@@ -718,14 +714,14 @@ print(block.get_block_by_number("1024", True))
 | stateRoot        | 世界状态根哈希值                                            |
 | timeStamp        | 时间戳                                                      |
 | totalDifficulty  | 挖矿难度                                                    |
-| transactions     | 交易详情                                                    |
-| transactionsRoot | 交易根节点哈希值                                            |
+| transactions     | 交易列表                                                    |
+| transactionsRoot | 交易默克尔树根节点哈希值                                            |
 | uncles           | 叔块信息，一般为空                                          |
 | validator        | 矿工地址                                                  |
 
 ## eth_getBlockTransactionCountByHash
 
-根据区块Hash获取区块中的交易数量
+根据区块hash获取区块中的交易数量
 
 ```shell
 
@@ -768,11 +764,11 @@ print(block.get_block_transaction_count_by_hash("0x0456e6f0d2942f866356e142a681b
 
 | 参数名称 | 描述     |
 | -------- | -------- |
-| result   | 交易数量 |
+| result   | 区块中交易数量 |
 
 ## eth_getBlockTransactionCountByNumber
 
-根据区块高度获取区块中的交易数量，默认区块高度为`latest`
+根据区块高度获取区块中的交易数量，默认高度为(`latest`)最新高度
 
 ```shell
 
@@ -815,7 +811,7 @@ print(block.get_block_transaction_count_by_number("latest"))
 
 | 参数名称 | 描述     |
 | -------- | -------- |
-| result   | 交易数量 |
+| result   | 区块中交易数量 |
 
 # 共识相关
 
