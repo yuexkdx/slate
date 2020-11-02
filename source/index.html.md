@@ -128,6 +128,22 @@ GetBlockByHash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
 GetBlockByNumber|[根据区块高度获取区块详情](#eth_getblockbynumber)
 GetBlockTxCountByHash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
 GetBlockTxCountByNumber|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
+GetValidatorsByBlockNum|[根据高区块度获取出块节点](#dpos_validators)
+GetValidatorInfo|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
+GetCandidatesByBlockNum|[根据区块高度获取候选节点](#dpos_candidates)
+GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
+GetEpochID|[根据区块高度获取周期号](#dpos_epochid)
+GetVoteDeposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
+GetCandidateDeposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
+GetVotesCandidatesByAddress|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
+GetAllVotesOfCandidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
+GetAllVotesOfValidator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
+GetValidatorDistribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
+GetValidatorReward|[根据出块节点地址和起止高度，获取高度间出块节点的总奖励](#dpos_getvalidatorreward)
+GetBlockReward|[根据区块高度，获取区块的奖励值](#dpos_getblockreward)
+GetEpochInitDepositByNumber|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
+GetConfirmedBlockNumber|[获取不可逆块高](#dpos_getconfirmedblocknumber)
+
 
 ## Python SDK
 
@@ -331,16 +347,16 @@ func main() {
 | 参数名称    | 描述                                                       |
 | ----------- | ---------------------------------------------------------- |
 | BlockHash   | 区块哈希值                                                 |
-| BlockNumber | 区块号                                                     |
+| BlockNumber | 区块高度                                                     |
 | Gas         | 所有计算量的计价单位                                       |
-| GasPrice    | 表示交易发送方对每单位 Gas 愿意支付的价格（以 Wei 计量）。 |
+| GasPrice    | 表示交易发送方对每单位 Gas 愿意支付的价格（以 `camel` 计量）。 |
 | Hash        | 交易哈希值                                                 |
 | Input       | 填充数据                                                   |
 | Nonce       | 此账户发出的交易序号数                                     |
 | R、S、V     | 在交易的密码学签名中用到的值，可以用于确定交易的发送方。   |
 | To          | 交易方                                                     |
 | TxIndex     | 交易序号                                                   |
-| Value       | 代币数量                                                   |
+| Value       | 代币数量(单位`camel`))                                                  |
 
 ## eth_getTransactionReceipt
 
@@ -729,7 +745,7 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述   |
 | -------- | -------- | ------ |
-| height   | 是       | 区块号 |
+| height   | 是       | 区块高度 |
 
 #### 返回参数
 
@@ -780,7 +796,7 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述   |
 | -------- | -------- | ------ |
-| height   | 否       | 区块号 |
+| height   | 否       | 区块高度 |
 
 #### 返回参数
 
@@ -829,14 +845,14 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
-| address  | 是       | 超级节点地址 |
-| height   | 否       | 区块号       |
+| address  | 是       | 出块节点地址 |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
 | 参数名称            | 描述                   |
 | ------------------- | ---------------------- |
-| validator           | 超级节点地址           |
+| validator           | 出块节点地址           |
 | total_vote          | 总票数                 |
 | current_epoch       | 查询高度对应的周期     |
 | epoch_mined_blocks  | 节点在该周期的出块数量 |
@@ -883,7 +899,7 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述   |
 | -------- | -------- | ------ |
-| height   | 否       | 区块号 |
+| height   | 否       | 区块高度 |
 
 #### 返回参数
 
@@ -933,7 +949,7 @@ func main() {
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
 | address  | 是       | 候选节点地址 |
-| height   | 否       | 区块号       |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
@@ -985,7 +1001,7 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述   |
 | -------- | -------- | ------ |
-| height   | 否       | 区块号 |
+| height   | 否       | 区块高度 |
 
 #### 返回参数
 
@@ -1035,7 +1051,7 @@ func main() {
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
 | address  | 是       | 投票节点地址 |
-| height   | 否       | 区块号       |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
@@ -1072,7 +1088,7 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	candidateDeposit, err := client.GetCanndidateDeposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
+	candidateDeposit, err := client.GetCandidateDeposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
 		panic("get candidateDeposit error, err = " + err.Error())
 	}
@@ -1085,7 +1101,7 @@ func main() {
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
 | address  | 是       | 候选节点地址 |
-| height   | 否       | 区块号       |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
@@ -1135,7 +1151,7 @@ func main() {
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
 | address  | 是       | 投票节点地址 |
-| height   | 否       | 区块号       |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
@@ -1185,7 +1201,7 @@ func main() {
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
 | address  | 是       | 候选节点地址 |
-| height   | 否       | 区块号       |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
@@ -1236,7 +1252,7 @@ func main() {
 | 参数名称 | 是否必需 | 描述         |
 | -------- | -------- | ------------ |
 | address  | 是       | 超级节点地址 |
-| height   | 否       | 区块号       |
+| height   | 否       | 区块高度       |
 
 #### 返回参数
 
@@ -1287,8 +1303,8 @@ func main() {
 | 参数名称    | 是否必需 | 描述         |
 | ----------- | -------- | ------------ |
 | address     | 是       | 超级节点地址 |
-| startHeight | 是       | 开始区块号   |
-| endHeight   | 否       | 结束区块号   |
+| startHeight | 是       | 开始区块高度   |
+| endHeight   | 否       | 结束区块高度   |
 
 #### 返回参数
 
@@ -1339,8 +1355,8 @@ func main() {
 | 参数名称    | 是否必需 | 描述         |
 | ----------- | -------- | ------------ |
 | address     | 是       | 超级节点地址 |
-| startHeight | 是       | 开始区块号   |
-| endHeight   | 否       | 结束区块号   |
+| startHeight | 是       | 开始区块高度   |
+| endHeight   | 否       | 结束区块高度   |
 
 #### 返回参数
 
@@ -1389,7 +1405,7 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述   |
 | -------- | -------- | ------ |
-| height   | 否       | 区块号 |
+| height   | 否       | 区块高度 |
 
 #### 返回参数
 
@@ -1438,7 +1454,7 @@ func main() {
 
 | 参数名称 | 是否必需 | 描述   |
 | -------- | -------- | ------ |
-| height   | 否       | 区块号 |
+| height   | 否       | 区块高度 |
 
 #### 返回参数
 
@@ -1493,7 +1509,7 @@ func main() {
 
 | 参数名称 | 描述 |
 | -------- | ---- |
-| result   | 块号 |
+| result   | 区块高度 |
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
