@@ -210,6 +210,11 @@ if __name__ == "__main__":
 
 根据账户地址和区块高度获取账户余额，默认高度为(`latest`)最新高度
 
+<aside class="notice">
+获取账户余额返回结果的单位为<code>Camel</code>
+其中：1 dx = 10^9 GCamel = 10^18 Camel
+</aside>
+
 ```python
 from gdx.jsonrpc.account.account import Account
 
