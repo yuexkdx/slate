@@ -965,22 +965,6 @@ func main() {
 | -------- | -------- |
 | result   | 周期编号 |
 
-## dpos_applyCandidate
-
-根据交易Hash获取交易副本
-
-## dpos_cancelCandidate
-
-根据交易Hash获取交易副本
-
-## dpos_vote
-
-根据交易Hash获取交易副本
-
-## dpos_cancelVote
-
-根据交易Hash获取交易副本
-
 ## dpos_voteDeposit
 
 查询投票节点在指定高度的质押信息，区块高度默认为最新高度（空）
@@ -1322,6 +1306,146 @@ func main() {
 | -------- | ------ |
 | result   | 总奖励 |
 
+## dpos_getBlockReward
+
+查询指定区块高度时的出块奖励，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_block_reward())
+print(dpos.get_block_reward("1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getBlockReward","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getBlockReward","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	blockReward, err := client.GetBlockReward(1000)
+	if err != nil {
+		panic("get blockReward error, err = " + err.Error())
+	}
+	fmt.Println("blockReward:", blockReward)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述   |
+| -------- | -------- | ------ |
+| height   | 否       | 区块号 |
+
+#### 返回参数
+
+| 参数名称    | 描述     |
+| ----------- | -------- |
+| totalReward | 出块奖励 |
+
+## dpos_getEpochInitDepositByNumber
+
+根据区块高度查询对应周期的初始质押数，区块高度默认为最新高度（空）
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_epoch_init_deposit())
+print(dpos.get_epoch_init_deposit("1000"))
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getEpochInitDepositByNumber","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getEpochInitDepositByNumber","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	initDeposit, err := client.GetEpochInitDepositByNumber(1000)
+	if err != nil {
+		panic("get initDeposit error, err = " + err.Error())
+	}
+	fmt.Printf("initDeposit = %+v\n", initDeposit)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述   |
+| -------- | -------- | ------ |
+| height   | 否       | 区块号 |
+
+#### 返回参数
+
+| 参数名称              | 描述       |
+| --------------------- | ---------- |
+| Epoch                 | 所在周期   |
+| totalCandidateDeposit | 初始质押数 |
+
+
+## dpos_getConfirmedBlockNumber
+
+查询最新不可逆的块
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_confirmed_block_number())
+```
+
+```shell
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getConfirmedBlockNumber","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
+)
+
+func main() {
+	client := jsonrpc.NewClient()
+	block, err := client.GetValidatorsByBlockNum()
+	if err != nil {
+		panic("get block error, err = " + err.Error())
+	}
+	fmt.Println("block:", block)
+}
+```
+
+#### 请求参数
+
+| 参数名称 | 是否必需 | 描述 |
+| -------- | -------- | ---- |
+
+
+#### 返回参数
+
+| 参数名称 | 描述 |
+| -------- | ---- |
+| result   | 块号 |
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
