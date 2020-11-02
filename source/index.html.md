@@ -276,16 +276,15 @@ package main
 import (
 	"fmt"
 	"github.com/DxChainNetwork/gdx-sdk/gdx-sdk-go/jsonrpc"
-	"math/big"
 )
 
 func main() {
 	client := jsonrpc.NewClient()
-	account, err := client.GetBalance("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", nil)
+	gasPrice, err := client.GetGasPrice()
 	if err != nil {
-		panic("get balance error, err = " + err.Error())
+		panic("get gas price error, err = " + err.Error())
 	}
-	fmt.Println("AvailableBalance = ", account.AvailableBalance.Div(account.AvailableBalance, big.NewInt(1e18)), "dx")
+	fmt.Println("gasPrice = ", gasPrice)
 }
 ```
 
