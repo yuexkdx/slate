@@ -310,7 +310,7 @@ result |  客户端持有的地址列表
 
 ## eth_gasPrice
 
-返回当前链的gas price
+返回链当前的gas price
 
 ```shell
 
@@ -349,7 +349,7 @@ print(account.get_gas_price())
 
 参数名称    |  描述
 --------- |  -----------
-result | 当前链的gas price
+result | 链当前的gas price
 
 # 交易相关
 
@@ -401,21 +401,21 @@ print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5
 | -------- | -------- | ---------- |
 | hash     | 是       | 交易哈希值 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称    | 描述                                                       |
 | ----------- | ---------------------------------------------------------- |
-| BlockHash   | 区块哈希值                                                 |
-| BlockNumber | 区块高度                                                     |
-| Gas         | 所有计算量的计价单位                                       |
-| GasPrice    | 表示交易发送方对每单位 Gas 愿意支付的价格（以 `camel` 计量）。 |
-| Hash        | 交易哈希值                                                 |
-| Input       | 填充数据                                                   |
-| Nonce       | 此账户发出的交易序号数                                     |
-| R、S、V     | 在交易的密码学签名中用到的值，可以用于确定交易的发送方。   |
-| To          | 交易方                                                     |
-| TxIndex     | 交易序号                                                   |
-| Value       | 转账金额                                                 |
+| blockHash   | 区块哈希值                                                 |
+| blockNumber | 区块高度                                                     |
+| gas         | 所有计算量的计价单位                                       |
+| gasPrice    | 表示交易发送方对每单位 Gas 愿意支付的价格（以 `camel` 计量）。 |
+| hash        | 交易哈希值                                                 |
+| input       | 填充数据                                                   |
+| nonce       | 此账户发出的交易序号数                                     |
+| r、s、v      | 在交易的密码学签名中用到的值，可以用于确定交易的发送方。   |
+| to          | 交易方                                                     |
+| txIndex     | 交易序号                                                   |
+| value       | 转账金额                                                 |
 
 ## eth_getTransactionReceipt
 
@@ -464,21 +464,21 @@ print(transaction.get_transaction_receipts_by_hash("0x856ba402ba84232e1d32a56926
 | -------- | -------- | ------ |
 | hash     | 是       | hash值 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称          | 描述                                             |
 | ----------------- | ------------------------------------------------ |
-| BlockHash         | 区块哈希值                                       |
-| BlockNumber       | 区块高度                                           |
-| CumulativeGasUsed | 区块中交易预计消耗的 gas 总量                  |
-| From              | 发起这个交易的账户或者用户                     |
-| GasUsed           | 区块中交易所实际消耗的 gas 总量。                |
-| LogsBloom         | 布隆过滤器，用于判断某区块的交易是否产生了某日志 |
-| Status            | 交易状态                                         |
-| To                | 交易方                                           |
-| TxHash            | 交易哈希                                         |
-| TxIndex           | 交易在区块中索引                                         |
-| Logs              | 交易事件日志                                     |
+| blockHash         | 区块哈希值                                       |
+| blockNumber       | 区块高度                                           |
+| cumulativeGasUsed | 区块中交易预计消耗的 gas 总量                  |
+| from              | 发起这个交易的账户或者用户                     |
+| gasUsed           | 区块中交易所实际消耗的 gas 总量。                |
+| logsBloom         | 布隆过滤器，用于判断某区块的交易是否产生了某日志 |
+| status            | 交易状态                                         |
+| to                | 交易方                                           |
+| txHash            | 交易哈希                                         |
+| txIndex           | 交易在区块中索引                                         |
+| logs              | 交易事件日志                                     |
 
 ## eth_getTransactionCount
 
@@ -522,7 +522,7 @@ print(transaction.get_transaction_count("0x515a9a17b41024a1e9a41de21f90fa4cc7624
 | address  | 是       | 账户地址 |
 | height   | 是       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述     |
 | -------- | -------- |
@@ -568,7 +568,7 @@ print(block.get_block_height())
 #### 请求参数
 
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述   |
 | -------- | ------ |
@@ -625,31 +625,31 @@ print(block.get_block_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb1
 | hash     | 是       | 区块哈希                                    |
 | flag     | 是       | true返回交易详情，false返回交易哈希 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称         | 描述                                                        |
 | ---------------- | ----------------------------------------------------------- |
-| CoinBase         | 矿工收取奖励地址                                                    |
-| Difficulty       | 此区块的难度值                                              |
-| ExtraData        | 填充数据                                                    |
-| GasLimit         | gas limit 标示了该区块所记录的所有交易可以使用的 gas 总量 |
-| GasUsed          | 区块中各条交易所实际消耗的 gas 总量                        |
-| Hash             | 区块哈希值                                                  |
-| LogsBloom        | 布隆过滤器                                                  |
-| MixHash          | 用于验证一个区块是否被真正记录到链上的哈希值                |
-| Nonce            | 和 mixHash 一样，用于验证区块是否被真正记录到链上的值       |
-| Number           | 区块高度                                                      |
-| ParentHash       | 父区块哈希值                                                |
-| ReceiptsRoot     | 交易收据根节点哈希值                                        |
-| Sha3Uncles       | 叔块哈希值                                                  |
-| Size             | 当前区块的字节大小                                          |
-| StateRoot        | 世界状态根哈希值                                            |
-| TimeStamp        | 时间戳                                                      |
-| TotalDifficulty  | 挖矿难度                                                    |
-| Transactions     | 交易详情                                                    |
-| TransactionsRoot | 交易根节点哈希值                                            |
-| Uncles           | 叔块信息，一般为空                                          |
-| Validator        | 矿工地址                                                  |
+| coinBase         | 矿工收取奖励地址                                                    |
+| difficulty       | 此区块的难度值                                              |
+| extraData        | 填充数据                                                    |
+| gasLimit         | gas limit 标示了该区块所记录的所有交易可以使用的 gas 总量 |
+| gasUsed          | 区块中各条交易所实际消耗的 gas 总量                        |
+| hash             | 区块哈希值                                                  |
+| logsBloom        | 布隆过滤器                                                  |
+| mixHash          | 用于验证一个区块是否被真正记录到链上的哈希值                |
+| nonce            | 和 mixHash 一样，用于验证区块是否被真正记录到链上的值       |
+| number           | 区块高度                                                      |
+| parentHash       | 父区块哈希值                                                |
+| receiptsRoot     | 交易收据根节点哈希值                                        |
+| sha3Uncles       | 叔块哈希值                                                  |
+| size             | 当前区块的字节大小                                          |
+| stateRoot        | 世界状态根哈希值                                            |
+| timeStamp        | 时间戳                                                      |
+| totalDifficulty  | 挖矿难度                                                    |
+| transactions     | 交易详情                                                    |
+| transactionsRoot | 交易根节点哈希值                                            |
+| uncles           | 叔块信息，一般为空                                          |
+| validator        | 矿工地址                                                  |
 
 ## eth_getBlockByNumber
 
@@ -697,31 +697,31 @@ print(block.get_block_by_number("1024", True))
 | hash     | 是       | 区块哈希                                    |
 | flag     | 是       | true返回交易详情，false返回交易哈希|
 
-#### 返回参数
+#### 返回值
 
 | 参数名称         | 描述                                                        |
 | ---------------- | ----------------------------------------------------------- |
-| CoinBase         | 矿工收取奖励地址                                                    |
-| Difficulty       | 此区块的难度值                                              |
-| ExtraData        | 填充数据                                                    |
-| GasLimit         | gas limit 标示了该区块所记录的所有交易可以使用的 gas 总量。 |
-| GasUsed          | 区块中各条交易所实际消耗的 gas 总量。                       |
-| Hash             | 区块哈希值                                                  |
-| LogsBloom        | 布隆过滤器                                                  |
-| MixHash          | 用于验证一个区块是否被真正记录到链上的哈希值                |
-| Nonce            | 和 mixHash 一样，用于验证区块是否被真正记录到链上的值       |
-| Number           | 区块高度                                                      |
-| ParentHash       | 父区块哈希值                                                |
-| ReceiptsRoot     | 交易收据根节点哈希值                                        |
-| Sha3Uncles       | 叔块哈希值                                                  |
-| Size             | 当前区块的字节大小                                          |
-| StateRoot        | 世界状态根哈希值                                            |
-| TimeStamp        | 时间戳                                                      |
-| TotalDifficulty  | 挖矿难度                                                    |
-| Transactions     | 交易详情                                                    |
-| TransactionsRoot | 交易根节点哈希值                                            |
-| Uncles           | 叔块信息，一般为空                                          |
-| Validator        | 矿工地址                                                  |
+| coinBase         | 矿工收取奖励地址                                                    |
+| difficulty       | 此区块的难度值                                              |
+| extraData        | 填充数据                                                    |
+| gasLimit         | gas limit 标示了该区块所记录的所有交易可以使用的 gas 总量。 |
+| gasUsed          | 区块中各条交易所实际消耗的 gas 总量。                       |
+| hash             | 区块哈希值                                                  |
+| logsBloom        | 布隆过滤器                                                  |
+| mixHash          | 用于验证一个区块是否被真正记录到链上的哈希值                |
+| nonce            | 和 mixHash 一样，用于验证区块是否被真正记录到链上的值       |
+| number           | 区块高度                                                      |
+| parentHash       | 父区块哈希值                                                |
+| receiptsRoot     | 交易收据根节点哈希值                                        |
+| sha3Uncles       | 叔块哈希值                                                  |
+| size             | 当前区块的字节大小                                          |
+| stateRoot        | 世界状态根哈希值                                            |
+| timeStamp        | 时间戳                                                      |
+| totalDifficulty  | 挖矿难度                                                    |
+| transactions     | 交易详情                                                    |
+| transactionsRoot | 交易根节点哈希值                                            |
+| uncles           | 叔块信息，一般为空                                          |
+| validator        | 矿工地址                                                  |
 
 ## eth_getBlockTransactionCountByHash
 
@@ -764,7 +764,7 @@ print(block.get_block_transaction_count_by_hash("0x0456e6f0d2942f866356e142a681b
 | -------- | -------- | -------- |
 | hash     | 是       | 区块哈希 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述     |
 | -------- | -------- |
@@ -811,7 +811,7 @@ print(block.get_block_transaction_count_by_number("latest"))
 | -------- | -------- | ------ |
 | height   | 是       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述     |
 | -------- | -------- |
@@ -865,7 +865,7 @@ print(dpos.get_validators())
 | -------- | -------- | ------ |
 | height   | 否       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述         |
 | -------- | ------------ |
@@ -917,7 +917,7 @@ print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 | address  | 是       | 出块节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称            | 描述                   |
 | ------------------- | ---------------------- |
@@ -972,7 +972,7 @@ print(dpos.get_candidates())
 | -------- | -------- | ------ |
 | height   | 否       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述         |
 | -------- | ------------ |
@@ -1025,7 +1025,7 @@ print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 | address  | 是       | 候选节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称            | 描述               |
 | ------------------- | ------------------ |
@@ -1079,11 +1079,11 @@ print(dpos.get_epoch_id())
 | -------- | -------- | ------ |
 | height   | 否       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述     |
 | -------- | -------- |
-| result   | 周期编号 |
+| result   | 周期号 |
 
 ## dpos_voteDeposit
 
@@ -1131,7 +1131,7 @@ print(dpos.get_vote_deposit("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 | address  | 是       | 投票节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述   |
 | -------- | ------ |
@@ -1183,7 +1183,7 @@ print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 | address  | 是       | 候选节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述   |
 | -------- | ------ |
@@ -1235,7 +1235,7 @@ print(dpos.get_voted_candidates_by_address("0x515a9a17b41024a1e9a41de21f90fa4cc7
 | address  | 是       | 投票节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述             |
 | -------- | ---------------- |
@@ -1287,7 +1287,7 @@ print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 | address  | 是       | 候选节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称  | 描述     |
 | --------- | -------- |
@@ -1340,7 +1340,7 @@ print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 | address  | 是       | 超级节点地址 |
 | height   | 否       | 区块高度       |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称  | 描述     |
 | --------- | -------- |
@@ -1398,7 +1398,7 @@ print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 | startHeight | 是       | 开始区块高度   |
 | endHeight   | 否       | 结束区块高度   |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称  | 描述                   |
 | --------- | ---------------------- |
@@ -1452,7 +1452,7 @@ print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 10
 | startHeight | 是       | 开始区块高度   |
 | endHeight   | 否       | 结束区块高度   |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述   |
 | -------- | ------ |
@@ -1503,7 +1503,7 @@ print(dpos.get_block_reward())
 | -------- | -------- | ------ |
 | height   | 否       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称    | 描述     |
 | ----------- | -------- |
@@ -1554,11 +1554,11 @@ print(dpos.get_epoch_init_deposit())
 | -------- | -------- | ------ |
 | height   | 否       | 区块高度 |
 
-#### 返回参数
+#### 返回值
 
 | 参数名称              | 描述       |
 | --------------------- | ---------- |
-| Epoch                 | 所在周期   |
+| epoch                 | 所在周期   |
 | totalCandidateDeposit | 初始质押数 |
 
 
@@ -1603,7 +1603,7 @@ print(dpos.get_confirmed_block_number())
 | -------- | -------- | ---- |
 
 
-#### 返回参数
+#### 返回值
 
 | 参数名称 | 描述 |
 | -------- | ---- |
