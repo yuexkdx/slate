@@ -111,6 +111,31 @@ func main() {
 }
 ```
 
+```python
+import json
+from gdx.jsonrpc.transaction.transaction import Transaction
+
+if __name__ == "__main__":
+    tx = Transaction()
+    transaction = {
+        # Note that the address must be in checksum format or native bytes:
+        'to': '0x0000000000000000000000000000000000000000',
+        'value': 10,
+        'gas': 2000000,
+        'gasPrice': 234567897654321,
+        'nonce': 14,
+        'chainId': 0,
+        'data': ''
+    }
+    tr_json = tx.new_transaction(transaction)
+    tr = json.loads(tr_json)
+    key = '0xc1c3597ad0a514a08200a5b4be5a6a7e88975e6fc1e09ef49c42cc07367bca1c'
+    signed_json = tx.sign_tx(tr["result"], key)
+    signed_data = json.loads(signed_json)
+    tx_hash = tx.send_raw_transaction(signed_data["result"])
+    print(tx_hash)
+```
+
 <aside class="success">
 Golang SDK实现了DxChain的账户创建、批量创建账户以及离线签名方法，具体实现过程详见：<code>gdx-sdk-go/account/account.go</code>
 </aside>
@@ -179,31 +204,6 @@ GetBlockReward|[根据区块高度，获取区块的奖励值](#dpos_getblockrew
 GetEpochInitDepositByNumber|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
 GetConfirmedBlockNumber|[获取不可逆块高](#dpos_getconfirmedblocknumber)
 
-```python
-import json
-from gdx.jsonrpc.transaction.transaction import Transaction
-
-if __name__ == "__main__":
-    tx = Transaction()
-    transaction = {
-        # Note that the address must be in checksum format or native bytes:
-        'to': '0x0000000000000000000000000000000000000000',
-        'value': 10,
-        'gas': 2000000,
-        'gasPrice': 234567897654321,
-        'nonce': 14,
-        'chainId': 0,
-        'data': ''
-    }
-    tr_json = tx.new_transaction(transaction)
-    tr = json.loads(tr_json)
-    key = '0xc1c3597ad0a514a08200a5b4be5a6a7e88975e6fc1e09ef49c42cc07367bca1c'
-    signed_json = tx.sign_tx(tr["result"], key)
-    signed_data = json.loads(signed_json)
-    tx_hash = tx.send_raw_transaction(signed_data["result"])
-    print(tx_hash)
-```
-
 # 账户相关
 
 ## eth_getBalance
@@ -212,7 +212,7 @@ if __name__ == "__main__":
 
 <aside class="notice">
 获取账户余额返回结果的单位为<code>Camel</code>
-其中：1 dx = 10^9 GCamel = 10^18 Camel
+其中：1 Dx = 10^9 GCamel = 10^18 Camel
 </aside>
 
 ```python
