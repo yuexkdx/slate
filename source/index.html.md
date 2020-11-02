@@ -161,7 +161,7 @@ GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点�
 GetEpochID|[根据区块高度获取周期号](#dpos_epochid)
 GetVoteDeposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
 GetCandidateDeposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
-GetVotesCandidatesByAddress|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
+GetVotedCandidatesByAddress|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
 GetAllVotesOfCandidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
 GetAllVotesOfValidator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
 GetValidatorDistribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
@@ -902,7 +902,7 @@ func main() {
 	if err != nil {
 		panic("get validator error, err = " + err.Error())
 	}
-	fmt.Printf("validator = %+v\n", validator)
+	fmt.Printf("validator = %v\n", validator)
 }
 ```
 
@@ -1009,7 +1009,7 @@ func main() {
 	if err != nil {
 		panic("get candidate error, err = " + err.Error())
 	}
-	fmt.Printf("candidate = %+v\n", candidate)
+	fmt.Printf("candidate = %v\n", candidate)
 }
 ```
 
@@ -1096,17 +1096,10 @@ print(dpos.get_epoch_id())
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_vote_deposit("8d711efea31f3f0b40c512c0cfa5369cbde9838f"))
-```
-
 ```shell
 
 
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1119,12 +1112,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	voteDeposit, err := client.GetVoteDeposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
+	voteDeposit, err := client.GetVoteDeposit("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", 1000)
 	if err != nil {
 		panic("get deposit error, err = " + err.Error())
 	}
-	fmt.Println("voteDeposit:", voteDeposit)
+	fmt.Println("voteDeposit = ", voteDeposit)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_vote_deposit("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 ```
 
 #### 请求参数
@@ -1148,13 +1148,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-```
-
 ```shell
 
 
@@ -1175,8 +1168,15 @@ func main() {
 	if err != nil {
 		panic("get candidateDeposit error, err = " + err.Error())
 	}
-	fmt.Println("candidateDeposit:", candidateDeposit)
+	fmt.Println("candidateDeposit = ", candidateDeposit)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 ```
 
 #### 请求参数
@@ -1200,13 +1200,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_voted_candidates_by_address("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-```
-
 ```shell
 
 
@@ -1223,12 +1216,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	votedCandidates, err := client.GetVotesCandidatesByAddress("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
+	votedCandidates, err := client.GetVotedCandidatesByAddress("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", nil)
 	if err != nil {
 		panic("get votedCandidates error, err = " + err.Error())
 	}
-	fmt.Println("votedCandidates:", votedCandidates)
+	fmt.Println("votedCandidates = ", votedCandidates)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_voted_candidates_by_address("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 ```
 
 #### 请求参数
@@ -1252,13 +1252,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-```
-
 ```shell
 
 
@@ -1279,8 +1272,15 @@ func main() {
 	if err != nil {
 		panic("get allVotes error, err = " + err.Error())
 	}
-	fmt.Printf("allVotes = %+v\n", allVotes)
+	fmt.Printf("allVotes = %v\n", allVotes)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 ```
 
 #### 请求参数
@@ -1305,13 +1305,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-```
-
 ```shell
 
 
@@ -1328,12 +1321,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	allVotes, err := client.GetAllVotesOfValidator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
+	allVotes, err := client.GetAllVotesOfValidator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", nil)
 	if err != nil {
 		panic("get allVotes error, err = " + err.Error())
 	}
-	fmt.Printf("allVotes = %+v\n", allVotes)
+	fmt.Printf("allVotes = %v\n", allVotes)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 ```
 
 #### 请求参数
@@ -1362,17 +1362,10 @@ func main() {
 奖励分配的使用一般是计算一个周期内的奖励分配情况，其起止区块高度为(startEpochBlockHeight, endEpochBlockHeight]
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999"))
-```
-
 ```shell
 
 
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "0x2d599"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1385,12 +1378,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	distribution, err := client.GetValidatorDistribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 999, 1000)
+	distribution, err := client.GetValidatorDistribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 185753, nil)
 	if err != nil {
 		panic("get distribution error, err = " + err.Error())
 	}
-	fmt.Printf("distribution = %+v\n", distribution)
+	fmt.Printf("distribution = %v\n", distribution)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 999))
 ```
 
 #### 请求参数
@@ -1416,17 +1416,10 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999"))
-```
-
 ```shell
 
 
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
+curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "0x2d599"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1443,8 +1436,15 @@ func main() {
 	if err != nil {
 		panic("get validatorReward error, err = " + err.Error())
 	}
-	fmt.Printf("validatorReward = %+v\n", validatorReward)
+	fmt.Printf("validatorReward = %v\n", validatorReward)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000))
 ```
 
 #### 请求参数
@@ -1469,13 +1469,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_block_reward())
-```
-
 ```shell
 
 
@@ -1496,8 +1489,15 @@ func main() {
 	if err != nil {
 		panic("get blockReward error, err = " + err.Error())
 	}
-	fmt.Println("blockReward:", blockReward)
+	fmt.Println("blockReward = ", blockReward)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_block_reward())
 ```
 
 #### 请求参数
@@ -1510,7 +1510,7 @@ func main() {
 
 | 参数名称    | 描述     |
 | ----------- | -------- |
-| totalReward | 出块奖励 |
+| totalReward | 总出块奖励 |
 
 ## dpos_getEpochInitDepositByNumber
 
@@ -1519,13 +1519,6 @@ func main() {
 <aside class="notice">
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
-
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_epoch_init_deposit())
-```
 
 ```shell
 
@@ -1547,8 +1540,15 @@ func main() {
 	if err != nil {
 		panic("get initDeposit error, err = " + err.Error())
 	}
-	fmt.Printf("initDeposit = %+v\n", initDeposit)
+	fmt.Printf("initDeposit = %v\n", initDeposit)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_epoch_init_deposit())
 ```
 
 #### 请求参数
@@ -1569,13 +1569,6 @@ func main() {
 
 查询最新不可逆的块
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_confirmed_block_number())
-```
-
 ```shell
 
 
@@ -1592,12 +1585,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	block, err := client.GetValidatorsByBlockNum()
+	block, err := client.GetConfirmedBlockNumber()
 	if err != nil {
 		panic("get block error, err = " + err.Error())
 	}
-	fmt.Println("block:", block)
+	fmt.Println("block = ", block)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_confirmed_block_number())
 ```
 
 #### 请求参数
@@ -1610,4 +1610,4 @@ func main() {
 
 | 参数名称 | 描述 |
 | -------- | ---- |
-| result   | 区块高度 |
+| result   | 不可逆区块高度 |
