@@ -184,7 +184,7 @@ get_transaction_by_hash | [根据Hash获取交易详情](#eth_gettransactionbyha
 get_transaction_receipts_by_hash| [根据Hash获取交易收据](#eth_gettransactionreceipt)
 get_transaction_count  | [根据地址获取交易数量](#eth_gettransactioncount)
 get_block_height|[获取区块高度](#eth_getblocknumber)
-get_block_height_by_hash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
+get_block_by_hash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
 GetBlockByNumber|[根据区块高度获取区块详情](#eth_getblockbynumber)
 GetBlockTxCountByHash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
 GetBlockTxCountByNumber|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
@@ -481,14 +481,7 @@ print(transaction.get_transaction_receipts_by_hash("0x856ba402ba84232e1d32a56926
 
 ## eth_getTransactionCount
 
-根据地址获取交易数量
-
-```python
-from gdx.jsonrpc.transaction.transaction import Transaction
-
-transaction = Transaction()
-print(transaction.get_transaction_count("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", "latest"))
-```
+根据地址获取交易数量， 默认值为`latest`表示最新高度
 
 ```shell
 
@@ -506,12 +499,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	nonce, err := client.GetTxCount("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", "latest")
+	txCount, err := client.GetTxCount("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", "latest")
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get transaction count error, err = " + err.Error())
 	}
-	fmt.Println("nonce = ", nonce)
+	fmt.Println("transactionCount = ", txCount)
 }
+```
+
+```python
+from gdx.jsonrpc.transaction.transaction import Transaction
+
+transaction = Transaction()
+print(transaction.get_transaction_count("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5", "latest"))
 ```
 
 #### 请求参数
@@ -533,13 +533,6 @@ func main() {
 
 获取最新区块高度
 
-```python
-from gdx.jsonrpc.block.block import Block
-
-block = Block()
-print(block.get_block_height())
-```
-
 ```shell
 
 
@@ -556,12 +549,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	number, err := client.GetBlockNumber()
+	blockHeight, err := client.GetBlockNumber()
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get block height error, err = " + err.Error())
 	}
-	fmt.Println("number = ", number)
+	fmt.Println("blockHeight = ", blockHeight)
 }
+```
+
+```python
+from gdx.jsonrpc.block.block import Block
+
+block = Block()
+print(block.get_block_height())
 ```
 
 #### 请求参数
@@ -573,16 +573,14 @@ func main() {
 | -------- | ------ |
 | result   | 区块高度 |
 
+
 ## eth_getBlockByHash
 
 根据区块Hash获取区块详情
 
-```python
-from gdx.jsonrpc.block.block import Block
-
-block = Block()
-print(block.get_block_height_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a", True))
-```
+<aside class="notice">
+参数中flag控制区块中交易的返回形式; flag为true 返回交易详情， flag为talse 返回交易Hash
+</aside>
 
 ```shell
 
@@ -602,7 +600,7 @@ func main() {
 	client := jsonrpc.NewClient()
 	block, err := client.GetBlockByHash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a",true)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get block info error, err = " + err.Error())
 	}
 	jsonBlock, err := json.Marshal(block)
 	if err != nil {
@@ -612,12 +610,19 @@ func main() {
 }
 ```
 
+```python
+from gdx.jsonrpc.block.block import Block
+
+block = Block()
+print(block.get_block_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a", True))
+```
+
 #### 请求参数
 
 | 参数名称 | 是否必需 | 描述                                        |
 | -------- | -------- | ------------------------------------------- |
 | hash     | 是       | 区块哈希                                    |
-| flag     | 是       | true返回区块交易详情，false返回区块交易哈希 |
+| flag     | 是       | true返回交易详情，false返回交易哈希 |
 
 #### 返回参数
 
@@ -649,12 +654,9 @@ func main() {
 
 根据区块高度获取区块详情
 
-```python
-from gdx.jsonrpc.block.block import Block
-
-block = Block()
-print(block.get_block_height_by_number("1024", True))
-```
+<aside class="notice">
+参数中flag控制区块中交易的返回形式; flag为true 返回交易详情， flag为talse 返回交易Hash
+</aside>
 
 ```shell
 
@@ -674,7 +676,7 @@ func main() {
 	client := jsonrpc.NewClient()
 	block, err := client.GetBlockByNumber(1024,true)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get block info error, err = " + err.Error())
 	}
 	jsonBlock, err := json.Marshal(block)
 	if err != nil {
@@ -684,12 +686,19 @@ func main() {
 }
 ```
 
+```python
+from gdx.jsonrpc.block.block import Block
+
+block = Block()
+print(block.get_block_by_number("1024", True))
+```
+
 #### 请求参数
 
 | 参数名称 | 是否必需 | 描述                                        |
 | -------- | -------- | ------------------------------------------- |
 | hash     | 是       | 区块哈希                                    |
-| flag     | 是       | true返回区块交易详情，false返回区块交易哈希 |
+| flag     | 是       | true返回交易详情，false返回交易哈希 |
 
 #### 返回参数
 
@@ -721,13 +730,6 @@ func main() {
 
 根据区块Hash获取区块中的交易数量
 
-```python
-from gdx.jsonrpc.block.block import Block
-
-block = Block()
-print(block.get_block_transaction_count_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a"))
-```
-
 ```shell
 
 
@@ -746,10 +748,17 @@ func main() {
 	client := jsonrpc.NewClient()
 	txCount, err := client.GetBlockTxCountByHash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a")
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get block transaction count error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("txCount = ", txCount)
 }
+```
+
+```python
+from gdx.jsonrpc.block.block import Block
+
+block = Block()
+print(block.get_block_transaction_count_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a"))
 ```
 
 #### 请求参数
