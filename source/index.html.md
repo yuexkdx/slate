@@ -721,7 +721,6 @@ func main() {
 
 # 共识相关
 
-
 ## dpos_validators
 
 根据区块高度查询对应的超级节点列表，区块高度默认为最新高度（空）
@@ -749,11 +748,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	validators, err := client.GetValidatorsByBlockNum(1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get validators error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("validators:", validators)
 }
 ```
 
@@ -796,11 +795,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	validator, err := client.GetValidatorInfo("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get validator error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Printf("validator = %+v\n", validator)
 }
 ```
 
@@ -848,11 +847,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	candidates, err := client.GetCandidatesByBlockNum(1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get candidates error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("candidates:", candidates)
 }
 ```
 
@@ -895,11 +894,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	candidates, err := client.GetCandidateInfo("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get validator error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Printf("candidate = %+v\n", candidate)
 }
 ```
 
@@ -946,11 +945,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	epochID, err := client.GetEpochID(1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get epochID error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("epochID:", epochID)
 }
 ```
 
@@ -1009,11 +1008,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	voteDeposit, err := client.GetVoteDeposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get deposit error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("voteDeposit:", voteDeposit)
 }
 ```
 
@@ -1057,11 +1056,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	candidateDeposit, err := client.GetCanndidateDeposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get candidateDeposit error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("candidateDeposit:", candidateDeposit)
 }
 ```
 
@@ -1105,11 +1104,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	votedCandidates, err := client.GetVotesCandidatesByAddress("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get votedCandidates error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Println("votedCandidates:", votedCandidates)
 }
 ```
 
@@ -1153,11 +1152,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	allVotes, err := client.GetAllVotesOfCandidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get allVotes error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Printf("allVotes = %+v\n", allVotes)
 }
 ```
 
@@ -1202,11 +1201,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	allVotes, err := client.GetAllVotesOfValidator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get allVotes error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Printf("allVotes = %+v\n", allVotes)
 }
 ```
 
@@ -1251,11 +1250,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	distribution, err := client.GetValidatorDistribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 999, 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get distribution error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Printf("distribution = %+v\n", distribution)
 }
 ```
 
@@ -1301,11 +1300,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	txCount, err := client.GetBlockTxCountByNumber("latest")
+	validatorReward, err := client.GetValidatorReward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 999, 1000)
 	if err != nil {
-		panic("get nonce error, err = " + err.Error())
+		panic("get validatorReward error, err = " + err.Error())
 	}
-	fmt.Println("txCount:", txCount)
+	fmt.Printf("validatorReward = %+v\n", validatorReward)
 }
 ```
 
@@ -1322,6 +1321,7 @@ func main() {
 | 参数名称 | 描述   |
 | -------- | ------ |
 | result   | 总奖励 |
+
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
