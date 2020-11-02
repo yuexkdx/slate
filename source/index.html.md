@@ -204,16 +204,17 @@ Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照�
 [get_epoch_init_deposit](#dpos_getepochinitdepositbynumber)|根据区块高度，查询对应周期的质押数
 [get_confirmed_block_number](#dpos_getconfirmedblocknumber)|获取不可逆块高
 
+# 说明
+
+本SDK返回金额相关的单位均为`Camel`
+
+其中: 1 Dx = 10^9 Gcamle = 10^18 Camel
+
 # 账户相关
 
 ## eth_getBalance
 
 获取账户地址在指定高度的余额，默认高度为(`latest`)最新高度
-
-<aside class="notice">
-获取账户余额返回结果的单位为<code>Camel</code>
-其中：1 Dx = 10^9 GCamel = 10^18 Camel
-</aside>
 
 ```shell
 
@@ -256,11 +257,11 @@ height    | 否     | 区块高度
 
 #### 返回值
 
-参数名称       | 是否必需 | 描述
---------- | ------- | -----------
-total_balance|      | 账户总金额
-available_balance||可用金额
-frozen_assets||冻结金额
+参数名称       |  描述
+--------- |  -----------
+total_balance| 账户总金额
+available_balance|可用金额
+frozen_assets|冻结金额
 
 ## eth_accounts
 
@@ -303,13 +304,13 @@ print(account.accounts())
 
 #### 返回值
 
-参数名称    | 是否必需    | 描述
---------- | ------- | -----------
-result |         | 客户端持有的地址列表
+参数名称    |  描述
+--------- | -----------
+result |  客户端持有的地址列表
 
 ## eth_gasPrice
 
-返回当前链的gas price 单位为`camel`
+返回当前链的gas price
 
 ```shell
 
@@ -346,9 +347,9 @@ print(account.get_gas_price())
 
 #### 返回值
 
-参数名称    | 是否必需    | 描述
---------- | ------- | -----------
-result |         | 当前链的gas price，单位`camel`
+参数名称    |  描述
+--------- |  -----------
+result | 当前链的gas price
 
 # 交易相关
 
@@ -414,7 +415,7 @@ print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5
 | R、S、V     | 在交易的密码学签名中用到的值，可以用于确定交易的发送方。   |
 | To          | 交易方                                                     |
 | TxIndex     | 交易序号                                                   |
-| Value       | 代币数量(单位`camel`))                                                  |
+| Value       | 转账金额                                                 |
 
 ## eth_getTransactionReceipt
 
@@ -653,10 +654,6 @@ print(block.get_block_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb1
 ## eth_getBlockByNumber
 
 根据区块高度获取区块详情
-
-<aside class="notice">
-参数中flag控制区块中交易的返回形式; flag为true 返回交易详情， flag为talse 返回交易Hash
-</aside>
 
 ```shell
 
