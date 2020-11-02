@@ -208,7 +208,7 @@ Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照�
 
 ## eth_getBalance
 
-根据账户地址和区块高度获取账户余额，默认高度为(`latest`)最新高度
+获取账户地址在指定高度的余额，默认高度为(`latest`)最新高度
 
 <aside class="notice">
 获取账户余额返回结果的单位为<code>Camel</code>
@@ -266,14 +266,6 @@ frozen_assets||冻结金额
 
 获取客户端持有的地址列表
 
-#### 请求参数
-
-#### 返回值
-
-参数名称    | 是否必需    | 描述
---------- | ------- | -----------
-result |         | 客户端持有的地址列表
-
 ```shell
 
 
@@ -306,6 +298,14 @@ from gdx.jsonrpc.account.account import Account
 account = Account()
 print(account.accounts())
 ```
+
+#### 请求参数
+
+#### 返回值
+
+参数名称    | 是否必需    | 描述
+--------- | ------- | -----------
+result |         | 客户端持有的地址列表
 
 ## eth_gasPrice
 
