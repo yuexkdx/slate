@@ -181,7 +181,7 @@ get_balance  | [获取账户余额](#eth_getbalance)
 accounts | [获取客户端持有的地址清单](#eth_accounts)
 get_gas_price | [获取Gas价格](#eth_gasprice)
 get_transaction_by_hash | [根据Hash获取交易详情](#eth_gettransactionbyhash)
-GetTxReceipt| [根据Hash获取交易收据](#eth_gettransactionreceipt)
+get_transaction_receipts_by_hash| [根据Hash获取交易收据](#eth_gettransactionreceipt)
 get_transaction_count  | [根据地址获取交易数量](#eth_gettransactioncount)
 get_block_height|[获取区块高度](#eth_getblocknumber)
 get_block_height_by_hash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
@@ -356,12 +356,6 @@ result |         | 当前链的gas price，单位`camel`
 
 根据hash获取交易详情
 
-```python
-from gdx.jsonrpc.transaction.transaction import Transaction
-
-transaction = Transaction()
-print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606"))
-```
 
 ```shell
 
@@ -393,6 +387,13 @@ func main() {
 }
 ```
 
+```python
+from gdx.jsonrpc.transaction.transaction import Transaction
+
+transaction = Transaction()
+print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606"))
+```
+
 #### 请求参数
 
 | 参数名称 | 是否必需 | 描述       |
@@ -419,13 +420,6 @@ func main() {
 
 根据Hash获取交易收据
 
-```python
-from gdx.jsonrpc.transaction.transaction import Transaction
-
-transaction = Transaction()
-print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606"))
-```
-
 ```shell
 
 
@@ -446,14 +440,21 @@ func main() {
 	client := jsonrpc.NewClient()
 	tx, err := client.GetTxReceipt("0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606")
 	if err != nil {
-		panic("get transaction error, err = " + err.Error())
+		panic("get transaction receipts error, err = " + err.Error())
 	}
 	jsonTx, err := json.Marshal(tx)
 	if err != nil {
-		panic("convert the transaction json error, err = " + err.Error())
+		panic("convert the transaction receipts json error, err = " + err.Error())
 	}
 	fmt.Println(string(jsonTx))
 }
+```
+
+```python
+from gdx.jsonrpc.transaction.transaction import Transaction
+
+transaction = Transaction()
+print(transaction.get_transaction_receipts_by_hash("0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606"))
 ```
 
 #### 请求参数
