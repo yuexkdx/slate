@@ -33,6 +33,12 @@ DxChain API文档提供原生RPC和SDK两种访问方式，方便用户根据业
 
 DxChain API的后续更新请参照此[文档](#)。
 
+# 说明
+
+本SDK返回金额相关的单位均为`Camel`
+
+其中: 1 Dx = 10^9 Gcamle = 10^18 Camel
+
 # SDK接口描述
 
 目前我们提供Golang，Python两个语言版本的[SDK](https://github.com/DxChainNetwork/gdx-sdk)，并在SDK中内置了DxChain的所有API接口，具体接口名称参考SDK接口描述。
@@ -203,12 +209,6 @@ Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照�
 [get_block_reward](#dpos_getblockreward)|根据区块高度，获取区块的奖励值
 [get_epoch_init_deposit](#dpos_getepochinitdepositbynumber)|根据区块高度，查询对应周期的质押数
 [get_confirmed_block_number](#dpos_getconfirmedblocknumber)|获取不可逆块高
-
-# 说明
-
-本SDK返回金额相关的单位均为`Camel`
-
-其中: 1 Dx = 10^9 Gcamle = 10^18 Camel
 
 # 账户相关
 
