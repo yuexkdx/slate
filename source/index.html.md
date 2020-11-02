@@ -141,68 +141,68 @@ Golang SDK实现了DxChain的账户创建、批量创建账户以及离线签名
 </aside>
 
 
-方法名       | 功能描述
+方法       | 功能描述
 ---------   | ------- 
-GetBalance  | [获取账户余额](#eth_getbalance)
-GetAccounts | [获取客户端持有的地址清单](#eth_accounts)
-GetGasPrice | [获取Gas价格](#eth_gasprice)
-GetTxByHash | [根据Hash获取交易详情](#eth_gettransactionbyhash)
-GetTxReceipt| [根据Hash获取交易收据](#eth_gettransactionreceipt)
-GetTxCount  | [根据地址获取交易数量](#eth_gettransactioncount)
-GetBlockNumber|[获取区块高度](#eth_getblocknumber)
-GetBlockByHash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
-GetBlockByNumber|[根据区块高度获取区块详情](#eth_getblockbynumber)
-GetBlockTxCountByHash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
-GetBlockTxCountByNumber|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
-GetValidatorsByBlockNumber|[根据高区块度获取出块节点](#dpos_validators)
-GetValidatorInfo|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
-GetCandidatesByBlockNumber|[根据区块高度获取候选节点](#dpos_candidates)
-GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
-GetEpochID|[根据区块高度获取周期号](#dpos_epochid)
-GetVoteDeposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
-GetCandidateDeposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
-GetVotedCandidatesByAddress|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
-GetAllVotesOfCandidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
-GetAllVotesOfValidator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
-GetValidatorDistribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
-GetValidatorReward|[根据出块节点地址和起止高度，获取高度间出块节点的总奖励](#dpos_getvalidatorreward)
-GetBlockReward|[根据区块高度，获取区块的奖励值](#dpos_getblockreward)
-GetEpochInitDepositByNumber|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
-GetConfirmedBlockNumber|[获取不可逆块高](#dpos_getconfirmedblocknumber)
+[GetBalance](#eth_getbalance)  | 获取账户余额
+[GetAccounts](#eth_accounts) | 获取客户端持有的地址清单
+[GetGasPrice](#eth_gasprice) | 获取Gas价格
+[GetTxByHash](#eth_gettransactionbyhash) | 根据Hash获取交易详情
+[GetTxReceipt](#eth_gettransactionreceipt)| 根据Hash获取交易收据
+[GetTxCount](#eth_gettransactioncount)  | 根据地址获取交易数量
+[GetBlockNumber](#eth_getblocknumber)|获取区块高度
+[GetBlockByHash](#eth_getblockbyhash)|根据区块Hash获取区块详情
+[GetBlockByNumber](#eth_getblockbynumber)|根据区块高度获取区块详情
+[GetBlockTxCountByHash](#eth_getblocktransactioncountbyhash)|根据区块Hash获取区块中交易数量
+[GetBlockTxCountByNumber](#eth_getblocktransactioncountbynumber)|根据区块高度获取区块中交易数量
+[GetValidatorsByBlockNumber](#dpos_validators)|根据高区块度获取出块节点
+[GetValidatorInfo](#dpos_validator)|根据出块节点地址和区块高度，获取出块节点详情
+[GetCandidatesByBlockNumber](#dpos_candidates)|根据区块高度获取候选节点
+[GetCandidateInfo](#dpos_candidate)|根据候选节点地址和区块高度，获取候选节点详情
+[GetEpochID](#dpos_epochid)|根据区块高度获取周期号
+[GetVoteDeposit](#dpos_votedeposit)|根据矿机地址和区块高度，获取质押数
+[GetCandidateDeposit](#dpos_candidatedeposit)|根据候选节点和区块高度，获取候选节点质押数
+[GetVotedCandidatesByAddress](#dpos_getvotedcandidatesbyaddress)|根据矿机地址和区块高度，获取投票的候选节点
+[GetAllVotesOfCandidate](#dpos_getallvotesofcandidate)|根据候选节点地址和区块高度，获取候选节点的投票信息
+[GetAllVotesOfValidator](#dpos_getallvotesofvalidator)|根据出块节点地址和区块高度，获取出块节点的投票信息
+[GetValidatorDistribution](#dpos_getvalidatordistribution)|根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息
+[GetValidatorReward](#dpos_getvalidatorreward)|根据出块节点地址和起止高度，获取高度间出块节点的总奖励
+[GetBlockReward](#dpos_getblockreward)|根据区块高度，获取区块的奖励值
+[GetEpochInitDepositByNumber](#dpos_getepochinitdepositbynumber)|根据区块高度，查询对应周期的质押数
+[GetConfirmedBlockNumber](#dpos_getconfirmedblocknumber)|获取不可逆块高
 
 
 ## Python SDK
 
 Python SDK采用python实现DxChain RPC相关接口， 具体使用方式参照右侧python代码区
 
-方法名     | 功能描述
+方法     | 功能描述
 --------- | ------- 
-get_balance  | [获取账户余额](#eth_getbalance)
-accounts | [获取客户端持有的地址清单](#eth_accounts)
-get_gas_price | [获取Gas价格](#eth_gasprice)
-get_transaction_by_hash | [根据Hash获取交易详情](#eth_gettransactionbyhash)
-get_transaction_receipts_by_hash| [根据Hash获取交易收据](#eth_gettransactionreceipt)
-get_transaction_count  | [根据地址获取交易数量](#eth_gettransactioncount)
-get_block_height|[获取区块高度](#eth_getblocknumber)
-get_block_by_hash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
-get_block_by_number|[根据区块高度获取区块详情](#eth_getblockbynumber)
-get_block_transaction_count_by_hash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
-get_block_transaction_count_by_number|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
-get_validators|[根据高区块度获取出块节点](#dpos_validators)
-get_validator|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
-get_candidates|[根据区块高度获取候选节点](#dpos_candidates)
-get_candidate|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
-get_epoch_id|[根据区块高度获取周期号](#dpos_epochid)
-get_vote_deposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
-get_candidate_deposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
-get_voted_candidates_by_address|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
-get_all_votes_of_candidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
-get_all_votes_of_validator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
-get_validator_distribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
-get_validator_reward|[根据出块节点地址和起止高度，获取高度间出块节点的总奖励](#dpos_getvalidatorreward)
-get_block_reward|[根据区块高度，获取区块的奖励值](#dpos_getblockreward)
-get_epoch_init_deposit|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
-get_confirmed_block_number|[获取不可逆块高](#dpos_getconfirmedblocknumber)
+[get_balance](#eth_getbalance)  | 获取账户余额
+[accounts](#eth_accounts) | 获取客户端持有的地址清单
+[get_gas_price](#eth_gasprice) | 获取Gas价格
+[get_transaction_by_hash](#eth_gettransactionbyhash) | 根据Hash获取交易详情
+[get_transaction_receipts_by_hash](#eth_gettransactionreceipt)| 根据Hash获取交易收据
+[get_transaction_count](#eth_gettransactioncount) | 根据地址获取交易数量
+[get_block_height](#eth_getblocknumber)|获取区块高度
+[get_block_by_hash](#eth_getblockbyhash)|根据区块Hash获取区块详情
+[get_block_by_number](#eth_getblockbynumber)|根据区块高度获取区块详情
+[get_block_transaction_count_by_hash](#eth_getblocktransactioncountbyhash)|根据区块Hash获取区块中交易数量
+[get_block_transaction_count_by_number](#eth_getblocktransactioncountbynumber)|根据区块高度获取区块中交易数量
+[get_validators](#dpos_validators)|根据高区块度获取出块节点
+[get_validator](#dpos_validator)|根据出块节点地址和区块高度，获取出块节点详情
+[get_candidates](#dpos_candidates)|根据区块高度获取候选节点
+[get_candidate](#dpos_candidate)|根据候选节点地址和区块高度，获取候选节点详情
+[get_epoch_id](#dpos_epochid)|根据区块高度获取周期号
+[get_vote_deposit](#dpos_votedeposit)|根据矿机地址和区块高度，获取质押数
+[get_candidate_deposit](#dpos_candidatedeposit)|根据候选节点和区块高度，获取候选节点质押数
+[get_voted_candidates_by_address](#dpos_getvotedcandidatesbyaddress)|根据矿机地址和区块高度，获取投票的候选节点
+[get_all_votes_of_candidate](#dpos_getallvotesofcandidate)|根据候选节点地址和区块高度，获取候选节点的投票信息
+[get_all_votes_of_validator](#dpos_getallvotesofvalidator)|根据出块节点地址和区块高度，获取出块节点的投票信息
+[get_validator_distribution](#dpos_getvalidatordistribution)|根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息
+[get_validator_reward](#dpos_getvalidatorreward)|根据出块节点地址和起止高度，获取高度间出块节点的总奖励
+[get_block_reward](#dpos_getblockreward)|根据区块高度，获取区块的奖励值
+[get_epoch_init_deposit](#dpos_getepochinitdepositbynumber)|根据区块高度，查询对应周期的质押数
+[get_confirmed_block_number](#dpos_getconfirmedblocknumber)|获取不可逆块高
 
 # 账户相关
 
