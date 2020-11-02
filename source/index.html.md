@@ -189,20 +189,20 @@ get_block_by_number|[根据区块高度获取区块详情](#eth_getblockbynumber
 get_block_transaction_count_by_hash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
 get_block_transaction_count_by_number|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
 get_validators|[根据高区块度获取出块节点](#dpos_validators)
-GetValidatorInfo|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
-GetCandidatesByBlockNum|[根据区块高度获取候选节点](#dpos_candidates)
-GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
-GetEpochID|[根据区块高度获取周期号](#dpos_epochid)
-GetVoteDeposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
-GetCandidateDeposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
-GetVotesCandidatesByAddress|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
-GetAllVotesOfCandidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
-GetAllVotesOfValidator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
-GetValidatorDistribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
-GetValidatorReward|[根据出块节点地址和起止高度，获取高度间出块节点的总奖励](#dpos_getvalidatorreward)
-GetBlockReward|[根据区块高度，获取区块的奖励值](#dpos_getblockreward)
-GetEpochInitDepositByNumber|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
-GetConfirmedBlockNumber|[获取不可逆块高](#dpos_getconfirmedblocknumber)
+get_validator|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
+get_candidates|[根据区块高度获取候选节点](#dpos_candidates)
+get_candidate|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
+get_epoch_id|[根据区块高度获取周期号](#dpos_epochid)
+get_vote_deposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
+get_candidate_deposit|[根据候选节点和区块高度，获取候选节点质押数](#dpos_candidatedeposit)
+get_voted_candidates_by_address|[根据矿机地址和区块高度，获取投票的候选节点](#dpos_getvotedcandidatesbyaddress)
+get_all_votes_of_candidate|[根据候选节点地址和区块高度，获取候选节点的投票信息](#dpos_getallvotesofcandidate)
+get_all_votes_of_validator|[根据出块节点地址和区块高度，获取出块节点的投票信息](#dpos_getallvotesofvalidator)
+get_validator_distribution|[根据出块节点地址和起止高度，获取高度间出块节点的奖励分配信息](#dpos_getvalidatordistribution)
+get_validator_reward|[根据出块节点地址和起止高度，获取高度间出块节点的总奖励](#dpos_getvalidatorreward)
+get_block_reward|[根据区块高度，获取区块的奖励值](#dpos_getblockreward)
+get_epoch_init_deposit|[根据区块高度，查询对应周期的质押数](#dpos_getepochinitdepositbynumber)
+get_confirmed_block_number|[获取不可逆块高](#dpos_getconfirmedblocknumber)
 
 # 账户相关
 
@@ -826,11 +826,14 @@ print(block.get_block_transaction_count_by_number("latest"))
 
 根据区块高度查询对应的超级节点列表，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":["0x1f"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -856,7 +859,6 @@ from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_validators())
-print(dpos.get_validators("1000"))
 ```
 
 
@@ -876,19 +878,14 @@ print(dpos.get_validators("1000"))
 
 根据地址和区块高度查询对应的超级节点详细信息，区块高度默认为最新高度（空）
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
-```
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -907,6 +904,13 @@ func main() {
 	}
 	fmt.Printf("validator = %+v\n", validator)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 ```
 
 #### 请求参数
@@ -930,19 +934,21 @@ func main() {
 
 根据区块高度查询对应的候选节点列表，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_candidates())
-print(dpos.get_candidates("1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidates","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidates","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -979,19 +985,21 @@ func main() {
 
 根据地址和区块高度查询对应的候选节点详细信息，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1032,19 +1040,21 @@ func main() {
 
 根据区块高度查询对应的周期编号，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_epoch_id())
-print(dpos.get_epoch_id("1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_epochID","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_epochID","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1081,19 +1091,21 @@ func main() {
 
 查询投票节点在指定高度的质押信息，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_vote_deposit("8d711efea31f3f0b40c512c0cfa5369cbde9838f"))
-print(dpos.get_vote_deposit("8d711efea31f3f0b40c512c0cfa5369cbde9838f", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1131,19 +1143,21 @@ func main() {
 
 查询候选节点在指定高度的质押信息，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidateDeposit","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidateDeposit","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1181,19 +1195,21 @@ func main() {
 
 查询投票节点在指定块高时投了哪些候选节点，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_voted_candidates_by_address("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-print(dpos.get_voted_candidates_by_address("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getVotedCandidatesByAddress","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getVotedCandidatesByAddress","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1231,19 +1247,21 @@ func main() {
 
 查询候选节点在指定块高被哪些投票节点投了，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfCandidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfCandidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1282,19 +1300,21 @@ func main() {
 
 查询超级节点在指定块高被哪些投票节点投了，这里查的是当前周期当选时的投票节点，同一周期查询结果相同，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfValidator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfValidator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1333,19 +1353,25 @@ func main() {
 
 查询某个超级节点，在指定区块期间的所有奖励分配情况，结束区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
+<aside class="success">
+奖励分配的使用一般是计算一个周期内的奖励分配情况，其起止区块高度为(startEpochBlockHeight, endEpochBlockHeight]
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999"))
-print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1385,19 +1411,21 @@ func main() {
 
 查询某个超级节点，在指定区块期间得到的总奖励，结束区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999"))
-print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1436,19 +1464,21 @@ func main() {
 
 查询指定区块高度时的出块奖励，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_block_reward())
-print(dpos.get_block_reward("1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getBlockReward","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getBlockReward","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
@@ -1485,19 +1515,21 @@ func main() {
 
 根据区块高度查询对应周期的初始质押数，区块高度默认为最新高度（空）
 
+<aside class="notice">
+高度为空值时，查询的结果为最新区块对应的结果
+</aside>
+
 ```python
 from gdx.jsonrpc.dpos.dpos import Dpos
 
 dpos = Dpos()
 print(dpos.get_epoch_init_deposit())
-print(dpos.get_epoch_init_deposit("1000"))
 ```
 
 ```shell
 
 
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getEpochInitDepositByNumber","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
-curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getEpochInitDepositByNumber","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
 ```go
