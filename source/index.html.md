@@ -154,9 +154,9 @@ GetBlockByHash|[根据区块Hash获取区块详情](#eth_getblockbyhash)
 GetBlockByNumber|[根据区块高度获取区块详情](#eth_getblockbynumber)
 GetBlockTxCountByHash|[根据区块Hash获取区块中交易数量](#eth_getblocktransactioncountbyhash)
 GetBlockTxCountByNumber|[根据区块高度获取区块中交易数量](#eth_getblocktransactioncountbynumber)
-GetValidatorsByBlockNum|[根据高区块度获取出块节点](#dpos_validators)
+GetValidatorsByBlockNumber|[根据高区块度获取出块节点](#dpos_validators)
 GetValidatorInfo|[根据出块节点地址和区块高度，获取出块节点详情](#dpos_validator)
-GetCandidatesByBlockNum|[根据区块高度获取候选节点](#dpos_candidates)
+GetCandidatesByBlockNumber|[根据区块高度获取候选节点](#dpos_candidates)
 GetCandidateInfo|[根据候选节点地址和区块高度，获取候选节点详情](#dpos_candidate)
 GetEpochID|[根据区块高度获取周期号](#dpos_epochid)
 GetVoteDeposit|[根据矿机地址和区块高度，获取质押数](#dpos_votedeposit)
@@ -846,11 +846,11 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	validators, err := client.GetValidatorsByBlockNum(1000)
+	validators, err := client.GetValidatorsByBlockNumber(1000)
 	if err != nil {
 		panic("get validators error, err = " + err.Error())
 	}
-	fmt.Println("validators:", validators)
+	fmt.Println("validators = ", validators)
 }
 ```
 
@@ -938,13 +938,6 @@ print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_candidates())
-```
-
 ```shell
 
 
@@ -961,12 +954,19 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	candidates, err := client.GetCandidatesByBlockNum(1000)
+	candidates, err := client.GetCandidatesByBlockNumber(1000)
 	if err != nil {
 		panic("get candidates error, err = " + err.Error())
 	}
-	fmt.Println("candidates:", candidates)
+	fmt.Println("candidates = ", candidates)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_candidates())
 ```
 
 #### 请求参数
@@ -989,13 +989,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
-```
-
 ```shell
 
 
@@ -1012,13 +1005,21 @@ import (
 
 func main() {
 	client := jsonrpc.NewClient()
-	candidates, err := client.GetCandidateInfo("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
+	candidate, err := client.GetCandidateInfo("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", 1000)
 	if err != nil {
-		panic("get validator error, err = " + err.Error())
+		panic("get candidate error, err = " + err.Error())
 	}
 	fmt.Printf("candidate = %+v\n", candidate)
 }
 ```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac"))
+```
+
 
 #### 请求参数
 
@@ -1044,13 +1045,6 @@ func main() {
 高度为空值时，查询的结果为最新区块对应的结果
 </aside>
 
-```python
-from gdx.jsonrpc.dpos.dpos import Dpos
-
-dpos = Dpos()
-print(dpos.get_epoch_id())
-```
-
 ```shell
 
 
@@ -1071,8 +1065,15 @@ func main() {
 	if err != nil {
 		panic("get epochID error, err = " + err.Error())
 	}
-	fmt.Println("epochID:", epochID)
+	fmt.Println("epochID = ", epochID)
 }
+```
+
+```python
+from gdx.jsonrpc.dpos.dpos import Dpos
+
+dpos = Dpos()
+print(dpos.get_epoch_id())
 ```
 
 #### 请求参数
