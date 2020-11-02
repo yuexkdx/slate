@@ -153,6 +153,8 @@ print(account.get_balance("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x515a9a17b41024a1e9a41de21f90fa4cc76246c5","latest"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -239,10 +241,6 @@ print(account.accounts())
 
 返回当前链的gas price 单位为`camel`
 
-```shell
-
-```
-
 ```python
 from gdx.jsonrpc.account.account import Account
 
@@ -251,6 +249,8 @@ print(account.get_balance("0x515a9a17b41024a1e9a41de21f90fa4cc76246c5"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -291,6 +291,8 @@ print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -352,6 +354,8 @@ print(transaction.get_transaction_by_hash("0x856ba402ba84232e1d32a569262978272b5
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["0x856ba402ba84232e1d32a569262978272b5179fb14d812bca9e42480c8ed3606"],"id":3}' -H 'Content-Type: application/json' http://13.212.17.162:11688
 ```
 
@@ -413,6 +417,8 @@ print(transaction.get_transaction_count("0x515a9a17b41024a1e9a41de21f90fa4cc7624
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0x515a9a17b41024a1e9a41de21f90fa4cc76246c5","latest"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -461,6 +467,8 @@ print(block.get_block_height())
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688 
 ```
 
@@ -503,6 +511,8 @@ print(block.get_block_height_by_hash("0x0456e6f0d2942f866356e142a681b13974ec328a
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a",true],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -573,6 +583,8 @@ print(block.get_block_height_by_number("1024", True))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x400",true],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -643,6 +655,8 @@ print(block.get_block_transaction_count_by_hash("0x0456e6f0d2942f866356e142a681b
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByHash","params":["0x0456e6f0d2942f866356e142a681b13974ec328ac05ebb14f17571e6019c758a"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -688,6 +702,8 @@ print(block.get_block_transaction_count_by_number("latest"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByNumber","params":["latest"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
@@ -736,6 +752,8 @@ print(dpos.get_validators("1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validators","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -783,6 +801,8 @@ print(dpos.get_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_validator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -835,6 +855,8 @@ print(dpos.get_candidates("1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidates","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidates","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -882,6 +904,8 @@ print(dpos.get_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -933,6 +957,8 @@ print(dpos.get_epoch_id("1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_epochID","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_epochID","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -980,6 +1006,8 @@ print(dpos.get_vote_deposit("8d711efea31f3f0b40c512c0cfa5369cbde9838f", "1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_voteDeposit","params":["8d711efea31f3f0b40c512c0cfa5369cbde9838f", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1028,6 +1056,8 @@ print(dpos.get_candidate_deposit("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidateDeposit","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_candidateDeposit","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1076,6 +1106,8 @@ print(dpos.get_voted_candidates_by_address("0xc476f174ce3b5e6b7928d9faa153b82450
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getVotedCandidatesByAddress","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getVotedCandidatesByAddress","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1124,6 +1156,8 @@ print(dpos.get_all_votes_of_candidate("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfCandidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfCandidate","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1173,6 +1207,8 @@ print(dpos.get_all_votes_of_validator("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfValidator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getAllVotesOfValidator","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1222,6 +1258,8 @@ print(dpos.get_validator_distribution("0xc476f174ce3b5e6b7928d9faa153b824502c19a
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorDistribution","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1272,6 +1310,8 @@ print(dpos.get_validator_reward("0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "9
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getValidatorReward","params":["0xc476f174ce3b5e6b7928d9faa153b824502c19ac", "999", "1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1321,6 +1361,8 @@ print(dpos.get_block_reward("1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getBlockReward","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getBlockReward","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1368,6 +1410,8 @@ print(dpos.get_epoch_init_deposit("1000"))
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getEpochInitDepositByNumber","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getEpochInitDepositByNumber","params":["1000"],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
@@ -1416,6 +1460,8 @@ print(dpos.get_confirmed_block_number())
 ```
 
 ```shell
+
+
 curl -X POST --data '{"jsonrpc":"2.0","method":"dpos_getConfirmedBlockNumber","params":[],"id":3}' -H 'Content-Type: application/json' http://127.0.0.1:11688
 ```
 
